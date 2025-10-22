@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Home, Menu, X, Code, Box, GitBranch, Link2, Eye, Lock, Layers, Zap } from 'lucide-react';
+// Using global variables from CDN
+const { useState } = React;
+const { ChevronLeft, ChevronRight, Home, Menu, X, Code, Box, GitBranch, Link2, Eye, Lock, Layers, Zap } = lucide;
 
 const OOPPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -3633,5 +3634,3 @@ c2.MostraStudenti();   // Database -> Mario, Laura`}
     </div>
   );
 };
-
-export default OOPPresentation;
