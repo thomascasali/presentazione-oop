@@ -666,3 +666,8 @@ foreach(Dipendente d in azienda)
     </div>
   )
 };
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.ereditarietaQuizSlide = ereditarietaQuizSlide;
+}

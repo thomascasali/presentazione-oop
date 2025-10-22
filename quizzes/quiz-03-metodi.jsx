@@ -639,3 +639,8 @@ const metodiQuizSlide = {
     )
   )
 };
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.metodiQuizSlide = metodiQuizSlide;
+}

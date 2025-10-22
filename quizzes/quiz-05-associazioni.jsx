@@ -822,3 +822,8 @@ const associazioniQuizSlide = {
   subtitle: "Aggregazione, Composizione, Relazioni N-M - Test Finale!",
   content: <AssociazioniQuizMain />
 };
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.associazioniQuizSlide = associazioniQuizSlide;
+}

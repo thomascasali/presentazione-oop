@@ -865,3 +865,8 @@ const fondamentiQuizSlide = {
   subtitle: "Classi, Oggetti, Attributi - Verifica la tua comprensione!",
   content: <FondamentiQuizMain />
 };
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.fondamentiQuizSlide = fondamentiQuizSlide;
+}
