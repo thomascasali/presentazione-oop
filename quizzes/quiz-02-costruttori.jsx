@@ -1,6 +1,8 @@
 // Quiz 02 - Costruttori e Properties
 // NO ES6 imports/exports - tutto inline
 
+// No custom icons needed - this quiz uses plain HTML elements and text
+
 const costruttoriQuizSlide = {
   title: "Quiz: Costruttori e Properties",
   content: function() {

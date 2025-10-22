@@ -22,6 +22,7 @@ const FadeIn = ({ children, delay = 0 }) => {
   );
 };
 
+// IconWrapper uses alternative pattern: receives icon component as prop
 const IconWrapper = ({ icon: Icon, className = "" }) => {
   return React.createElement(Icon, { className: `w-6 h-6 ${className}` });
 };

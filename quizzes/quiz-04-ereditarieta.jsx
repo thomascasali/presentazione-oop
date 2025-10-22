@@ -3,6 +3,8 @@
 // ========================================
 // Quiz scelta multipla, esercizi codice, flashcards e discussione
 
+// No custom icons needed - this quiz uses emojis and HTML radio buttons
+
 const ereditarietaQuizSlide = {
   title: "Quiz: Ereditarieta e Polimorfismo",
   subtitle: "Verifica le tue conoscenze",

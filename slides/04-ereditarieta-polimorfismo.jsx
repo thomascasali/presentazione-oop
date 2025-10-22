@@ -3,6 +3,8 @@
 // ========================================
 // Slide 27-35 migliorate con grafiche accattivanti
 
+// No icons needed - this file uses direct JSX with emojis and HTML elements
+
 const ereditarietaPolimorfismoSlides = [
   // ============================
   // SEZIONE EREDITARIETA (5 slide)

@@ -1,8 +1,70 @@
 // slides/03-metodi-incapsulamento.jsx
 // Slide Metodi, Incapsulamento e Visibilità (10 slide totali)
 
-const React = window.React;
-const { Code, Lock, Eye, Shield, Package, ArrowRight, CheckCircle, XCircle, AlertTriangle, Zap } = window.Lucide;
+const { useState } = React;
+
+// ========== ICON DEFINITIONS ==========
+const IconWrapper = ({ children, className = "", ...props }) =>
+  React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className,
+    ...props
+  }, children);
+
+const Code = (props) => React.createElement(IconWrapper, props,
+  React.createElement("polyline", { points: "16 18 22 12 16 6" }),
+  React.createElement("polyline", { points: "8 6 2 12 8 18" })
+);
+
+const Lock = (props) => React.createElement(IconWrapper, props,
+  React.createElement("rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2" }),
+  React.createElement("path", { d: "M7 11V7a5 5 0 0 1 10 0v4" })
+);
+
+const Eye = (props) => React.createElement(IconWrapper, props,
+  React.createElement("path", { d: "M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" }),
+  React.createElement("circle", { cx: "12", cy: "12", r: "3" })
+);
+
+const Shield = (props) => React.createElement(IconWrapper, props,
+  React.createElement("path", { d: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" })
+);
+
+const Package = (props) => React.createElement(IconWrapper, props,
+  React.createElement("path", { d: "m7.5 4.27 9 5.15" }),
+  React.createElement("path", { d: "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" }),
+  React.createElement("path", { d: "m3.3 7 8.7 5 8.7-5" }),
+  React.createElement("path", { d: "M12 22V12" })
+);
+
+const CheckCircle = (props) => React.createElement(IconWrapper, props,
+  React.createElement("path", { d: "M22 11.08V12a10 10 0 1 1-5.93-9.14" }),
+  React.createElement("polyline", { points: "22 4 12 14.01 9 11.01" })
+);
+
+const XCircle = (props) => React.createElement(IconWrapper, props,
+  React.createElement("circle", { cx: "12", cy: "12", r: "10" }),
+  React.createElement("path", { d: "m15 9-6 6" }),
+  React.createElement("path", { d: "m9 9 6 6" })
+);
+
+const AlertTriangle = (props) => React.createElement(IconWrapper, props,
+  React.createElement("path", { d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" }),
+  React.createElement("path", { d: "M12 9v4" }),
+  React.createElement("path", { d: "M12 17h.01" })
+);
+
+const Zap = (props) => React.createElement(IconWrapper, props,
+  React.createElement("polygon", { points: "13 2 3 14 12 14 11 22 21 10 12 10 13 2" })
+);
 
 const metodiIncapsulamentoSlides = [
   // ========== METODI (Slide 1-4) ==========
