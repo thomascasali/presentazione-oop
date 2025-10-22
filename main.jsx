@@ -39,6 +39,7 @@ const HomeIcon = () => (
 const OOPPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
+  const [jumpToSlide, setJumpToSlide] = useState('');
 
   // ==================== CARICAMENTO MODULI ====================
   // I moduli sono caricati tramite <script> in index.html
@@ -223,6 +224,23 @@ const OOPPresentation = () => {
     setShowMenu(false);
   };
 
+  const handleJumpToSlide = (e) => {
+    e.preventDefault();
+    const slideNum = parseInt(jumpToSlide);
+    if (!isNaN(slideNum) && slideNum >= 1 && slideNum <= allSlides.length) {
+      setCurrentSlide(slideNum - 1); // Convert from 1-based to 0-based
+      setJumpToSlide('');
+    }
+  };
+
+  const handleProgressBarClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percentage = clickX / rect.width;
+    const targetSlide = Math.floor(percentage * allSlides.length);
+    goToSlide(targetSlide);
+  };
+
   // Gestione tasti freccia
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -273,14 +291,63 @@ const OOPPresentation = () => {
             showMenu ? React.createElement(XIcon) : React.createElement(MenuIcon)
           ),
 
-          // Progress Bar
+          // Progress Bar (clickable)
           React.createElement(
             'div',
-            { key: 'progress-container', className: 'progress-container' },
+            {
+              key: 'progress-container',
+              className: 'progress-container',
+              onClick: handleProgressBarClick,
+              style: { cursor: 'pointer' },
+              title: 'Clicca per saltare a una posizione'
+            },
             React.createElement('div', {
               className: 'progress-bar',
               style: { width: `${progress}%` }
             })
+          ),
+
+          // Jump to Slide Form
+          React.createElement(
+            'form',
+            {
+              key: 'jump-form',
+              onSubmit: handleJumpToSlide,
+              style: { display: 'flex', alignItems: 'center', gap: '0.5rem' }
+            },
+            [
+              React.createElement('input', {
+                key: 'jump-input',
+                type: 'number',
+                min: 1,
+                max: allSlides.length,
+                value: jumpToSlide,
+                onChange: (e) => setJumpToSlide(e.target.value),
+                placeholder: '#',
+                style: {
+                  width: '50px',
+                  padding: '0.25rem 0.5rem',
+                  borderRadius: '0.25rem',
+                  border: '1px solid rgba(59, 130, 246, 0.5)',
+                  background: 'rgba(17, 24, 39, 0.8)',
+                  color: 'white',
+                  fontSize: '0.875rem',
+                  textAlign: 'center'
+                },
+                'aria-label': 'Vai alla slide'
+              }),
+              React.createElement(
+                'button',
+                {
+                  key: 'jump-btn',
+                  type: 'submit',
+                  className: 'icon-button',
+                  style: { padding: '0.25rem 0.5rem', fontSize: '0.75rem' },
+                  'aria-label': 'Vai'
+                },
+                'Vai'
+              )
+            ]
           ),
 
           // Home Button
