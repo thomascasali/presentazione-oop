@@ -65,13 +65,31 @@
         </div>
     </div>
 
-    <!-- Load the presentation component -->
-    <script type="text/babel" src="presentazione-oop.jsx"></script>
-    
+    <!-- Load the presentation modules -->
+    <!-- Dashboard -->
+    <script type="text/babel" src="slides/00-dashboard.jsx"></script>
+
+    <!-- Slide Modules -->
+    <script type="text/babel" src="slides/01-fondamenti.jsx"></script>
+    <script type="text/babel" src="slides/02-costruttori-properties.jsx"></script>
+    <script type="text/babel" src="slides/03-metodi-incapsulamento.jsx"></script>
+    <script type="text/babel" src="slides/04-ereditarieta-polimorfismo.jsx"></script>
+    <script type="text/babel" src="slides/05-associazioni-riepilogo.jsx"></script>
+
+    <!-- Quiz Modules -->
+    <script type="text/babel" src="quizzes/quiz-01-fondamenti.jsx"></script>
+    <script type="text/babel" src="quizzes/quiz-02-costruttori.jsx"></script>
+    <script type="text/babel" src="quizzes/quiz-03-metodi.jsx"></script>
+    <script type="text/babel" src="quizzes/quiz-04-ereditarieta.jsx"></script>
+    <script type="text/babel" src="quizzes/quiz-05-associazioni.jsx"></script>
+
+    <!-- Main Application -->
+    <script type="text/babel" src="main.jsx"></script>
+
     <script type="text/babel">
-        // Render the component
+        // Render the main component
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<OOPPresentation />);
+        root.render(React.createElement(OOPPresentation));
     </script>
 </body>
 </html>

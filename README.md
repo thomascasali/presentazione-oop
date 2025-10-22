@@ -8,81 +8,82 @@ Presentazione interattiva sulla Programmazione ad Oggetti con C# e UML, pensata 
 
 ## 📚 Contenuti
 
-La presentazione copre **40 slide** organizzate in 11 sezioni tematiche:
+La presentazione copre **46+ slide** organizzate in **5 moduli tematici + 5 quiz interattivi**:
 
-1. **Introduzione** (slide 0-1)
-   - Dashboard interattiva
-   - Panoramica OOP, C# e UML
+### 🎯 Modulo 0: Dashboard (1 slide)
+   - Dashboard interattiva con card animate
+   - Navigazione diretta ai moduli
+   - Statistiche corso (40+ slide, 5 quiz, ~90min)
 
-2. **Classi e Oggetti** (slide 2-4)
-   - Fondamenti della OOP
-   - Diagrammi UML
-   - Analogie e esempi pratici
+### 📦 Modulo 1: Fondamenti (8 slide + quiz)
+   - **Introduzione OOP**: C# 12.0, UML 2.5, .NET 8
+   - **Classi e Oggetti**: Template, istanze, analogie
+   - **Rappresentazione UML**: Diagrammi formali
+   - **Prima classe C#**: Esempio Personaggio
+   - **Attributi**: Tipi, convenzioni, inizializzazione
+   - **Quiz Interattivo**: Scelta multipla, Memory game, Bacheca
 
-3. **Attributi** (slide 5-8)
-   - Tipi e convenzioni
-   - Valori default
-   - Esempi con classi Studente, Prodotto, Auto
+### ⚡ Modulo 2: Costruttori e Properties (8 slide + quiz)
+   - **Costruttori**: Default, parametrizzati, overloading
+   - **Keyword 'this'**: Constructor chaining
+   - **Properties**: Get/set, auto-implemented, validation
+   - **Read-only**: Init-only (C# 9+)
+   - **Quiz Interattivo**: Scelta multipla, Esercizi codice, Bacheca
 
-4. **Costruttori** (slide 9-12)
-   - Default e parametrizzati
-   - Overloading
-   - Best practices
+### 🔒 Modulo 3: Metodi e Incapsulamento (10 slide + quiz)
+   - **Metodi**: Istanza, static, overloading
+   - **Return types**: void vs tipi di ritorno
+   - **Incapsulamento**: Information hiding, vantaggi
+   - **Visibilità**: public, private, protected, internal
+   - **Best practices**: Principio del minimo privilegio
+   - **Quiz Interattivo**: Scelta multipla, Drag-and-drop visibilità, Bacheca
 
-5. **Properties** (slide 13-16)
-   - Get/Set accessors
-   - Auto-implemented properties
-   - Read-only properties
-   - Validation
+### 🌳 Modulo 4: Ereditarietà e Polimorfismo (9 slide + quiz)
+   - **Ereditarietà**: base, virtual, override
+   - **Gerarchie**: Veicoli, RPG, Dipendenti
+   - **Polimorfismo**: Compile-time e runtime
+   - **Type casting**: Upcasting, downcasting, is/as
+   - **Quiz Interattivo**: Scelta multipla, Esercizi override, Flashcards, Bacheca
 
-6. **Metodi** (slide 17-20)
-   - Metodi di istanza
-   - Metodi static
-   - Overloading
-   - Esempi pratici
-
-7. **Incapsulamento** (slide 21-23)
-   - Information hiding
-   - Protezione dei dati
-   - Vantaggi
-
-8. **Visibilità** (slide 24-26)
-   - public, private, protected, internal
-   - Access modifiers
-   - Best practices
-
-9. **Ereditarietà** (slide 27-31)
-   - Classi base e derivate
-   - override e virtual
-   - Gerarchie di classi
-   - Esempi: Veicoli, Personaggi, Dipendenti
-
-10. **Polimorfismo** (slide 32-35)
-    - Compile-time (overloading)
-    - Runtime (override)
-    - Upcasting e downcasting
-    - Pattern matching
-
-11. **Associazioni** (slide 36-39)
-    - Aggregazione
-    - Composizione
-    - Relazioni N-M
-    - Esempi: Università, Ordini
-
-12. **Riepilogo** (slide 40)
-    - Sintesi finale dei concetti
+### 🔗 Modulo 5: Associazioni e Riepilogo (5 slide + quiz)
+   - **Aggregazione**: Rombo vuoto (◇), vita indipendente
+   - **Composizione**: Rombo pieno (◆), vita dipendente
+   - **Relazioni N-M**: Studenti ↔ Corsi
+   - **Riepilogo finale**: I 4 pilastri OOP, roadmap futuro
+   - **Quiz Interattivo**: Scelta multipla, Indovina tipo relazione, Congratulazioni
 
 ## 🚀 Caratteristiche
 
-- ✅ **Dashboard interattiva** con navigazione diretta agli argomenti
-- ✅ **Design responsive** (smartphone, tablet, PC)
-- ✅ **Tema moderno** blu/azzurro con gradients
-- ✅ **Diagrammi UML formali** in formato SVG
-- ✅ **Esempi di codice C#** da domini multipli (studenti, e-commerce, veicoli, gaming)
-- ✅ **Navigazione avanzata** con progress bar, frecce prev/next, home button
-- ✅ **Menu laterale** con indice completo di tutte le sezioni
-- ✅ **Syntax highlighting** per codice C#
-- ✅ **Animazioni fluide** tra le slide
+### 🎨 Design e UX
+- ✅ **Dashboard interattiva** con card animate e navigazione diretta
+- ✅ **Design responsive** ottimizzato per smartphone, tablet e PC
+- ✅ **Tema moderno** blu/cyan con gradients professionali
+- ✅ **Animazioni fluide** FadeIn, slide, scale, pulse
+- ✅ **Hover effects** avanzati con glowing borders
+- ✅ **Dark theme** ottimizzato per presentazioni
+
+### 📊 Contenuto Didattico
+- ✅ **Diagrammi UML formali** in formato SVG vettoriale
+- ✅ **Esempi di codice C#** da domini multipli (RPG, e-commerce, veicoli, università)
+- ✅ **Syntax highlighting** professionale per codice
+- ✅ **Oltre 20 icone SVG** per concetti visivi
+- ✅ **Analogie pratiche** per ogni concetto complesso
+
+### 🎮 Interattività
+- ✅ **5 Quiz completi** con scelta multipla, drag-and-drop, codice
+- ✅ **Memory games** con flashcards interattive
+- ✅ **Esercizi di codice** con correzione automatica
+- ✅ **Bacheche discussione** per ogni modulo
+- ✅ **Feedback immediato** con spiegazioni dettagliate
+- ✅ **Sistema di punteggio** e percentuali
+
+### 🧭 Navigazione
+- ✅ **Progress bar animata** con percentuale completamento
+- ✅ **Frecce prev/next** con keyboard shortcuts (←/→)
+- ✅ **Home button** per tornare alla dashboard
+- ✅ **Menu laterale** con indice completo e sottosezioni
+- ✅ **Contatore slide** (es. "5 / 46")
+- ✅ **Salto diretto** a qualsiasi slide dal menu
 
 ## 💻 Tecnologie
 
@@ -136,24 +137,59 @@ Visita: **https://thomascasali.github.io/presentazione-oop/**
 
 ```
 presentazione-oop/
-├── index.html              # Pagina principale HTML
-├── presentazione-oop.jsx   # Componente React con tutte le 40 slide
-├── README.md              # Questo file
-└── .claude/               # Configurazione Claude Code (opzionale)
+├── index.html                     # Pagina principale HTML
+├── main.jsx                       # Componente orchestratore
+├── README.md                      # Documentazione completa
+├── presentazione-oop.jsx          # [DEPRECATO] File monolitico originale
+│
+├── slides/                        # Moduli slide organizzati
+│   ├── 00-dashboard.jsx          # Dashboard interattiva (1 slide)
+│   ├── 01-fondamenti.jsx         # Classi, Oggetti, Attributi (8 slide)
+│   ├── 02-costruttori-properties.jsx  # Costruttori e Properties (8 slide)
+│   ├── 03-metodi-incapsulamento.jsx   # Metodi, Incapsulamento, Visibilità (10 slide)
+│   ├── 04-ereditarieta-polimorfismo.jsx  # Ereditarietà e Polimorfismo (9 slide)
+│   └── 05-associazioni-riepilogo.jsx    # Associazioni e Riepilogo (5 slide)
+│
+├── quizzes/                       # Quiz interattivi
+│   ├── quiz-01-fondamenti.jsx    # Quiz scelta multipla + memory game + bacheca
+│   ├── quiz-02-costruttori.jsx   # Quiz + esercizi codice + bacheca
+│   ├── quiz-03-metodi.jsx        # Quiz + drag-and-drop + bacheca
+│   ├── quiz-04-ereditarieta.jsx  # Quiz + esercizi + flashcards + bacheca
+│   └── quiz-05-associazioni.jsx  # Quiz + indovina tipo + bacheca finale
+│
+└── utils/                         # Utility e componenti condivisi
+    ├── components.jsx             # Icone SVG e componenti UI
+    └── slideCalculator.js         # Calcolo automatico numeri slide
 ```
 
-### File principali
+### File Principali
 
-- **`index.html`** (78 righe)
-  - Caricamento CDN (React, Tailwind, Babel, Lucide)
-  - Stili base e animazione loading
-  - Root div per React
+#### **`index.html`** (~95 righe)
+- Caricamento CDN (React, Tailwind, Babel)
+- Caricamento modulare di tutti i file JSX
+- Animazione loading iniziale
+- Root div per React
 
-- **`presentazione-oop.jsx`** (3636 righe)
-  - Componente principale `OOPPresentation`
-  - Array `slides` con tutte le 40 slide
-  - Logica di navigazione e menu
-  - Contenuto didattico completo
+#### **`main.jsx`** (~400 righe)
+- Componente orchestratore `OOPPresentation`
+- Caricamento dinamico di tutti i moduli
+- Sistema di navigazione completo (prev/next, menu, home)
+- Progress bar e contatore slide
+- Keyboard shortcuts (←/→, Home, Esc)
+
+#### **Moduli Slide** (totale ~2500 righe)
+Ogni file contiene:
+- Componenti inline (no import ES6)
+- Array di slide esportato come variabile globale
+- Animazioni FadeIn progressive
+- Design migliorato con gradients e icone
+
+#### **Quiz Interattivi** (totale ~4000 righe)
+Ogni quiz contiene:
+- React hooks per gestione stato (useState, useEffect)
+- Sezioni multiple (quiz, esercizi, bacheca)
+- Feedback immediato con spiegazioni
+- Sistema di punteggio e valutazione
 
 ## 🎓 Target Audience
 
