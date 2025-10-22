@@ -437,7 +437,7 @@ const OOPPresentation = () => {
               typeof currentSlideData.content === 'function'
                 ? React.createElement(currentSlideData.content)
                 : currentSlideData.content
-            : // Slide normale: renderizza con wrapper titolo
+            : // Slide normale: renderizza con wrapper e intestazione
               React.createElement(
                 'div',
                 { className: 'slide-inner' },
@@ -446,7 +446,7 @@ const OOPPresentation = () => {
                   currentSlideData.title &&
                     React.createElement(
                       'div',
-                      { key: 'slide-header', className: 'slide-header mb-6' },
+                      { key: 'slide-header', className: 'mb-6 pb-4 border-b-2 border-blue-500/30' },
                       [
                         React.createElement(
                           'h2',
@@ -464,7 +464,7 @@ const OOPPresentation = () => {
                   // Contenuto
                   React.createElement(
                     'div',
-                    { key: 'slide-body', className: 'slide-body' },
+                    { key: 'slide-body' },
                     currentSlideData.content
                   )
                 ]
