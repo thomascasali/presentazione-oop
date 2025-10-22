@@ -860,6 +860,7 @@ const FondamentiQuizMain = () => {
 // ============================================================================
 
 const fondamentiQuizSlide = {
+  isQuiz: true,
   title: "Quiz Interattivo: Fondamenti OOP",
   subtitle: "Classi, Oggetti, Attributi - Verifica la tua comprensione!",
   content: <FondamentiQuizMain />

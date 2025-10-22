@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m http.server:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\n🐛 Fix: Risolto problema di caricamento della presentazione\n\nCorrezioni:\n- Aggiunto CDN di Lucide React all''index.html\n- Rimossi import/export ES6 modules dal JSX (non compatibili con Babel Standalone)\n- Utilizzate variabili globali da CDN (React, lucide)\n\nLa presentazione ora si carica correttamente nel browser senza rotella infinita.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)",
+      "Bash(git commit -m \"$(cat <<''EOF''\n📝 Docs: Aggiornato README con documentazione completa\n\nAggiunte:\n- Link demo live GitHub Pages\n- Dettaglio completo delle 40 slide per sezione\n- Istruzioni di navigazione e utilizzo\n- Struttura file del progetto\n- Design system (colori, tipografia)\n- Guida sviluppo e modifiche\n- Sezione troubleshooting\n- Info autore e repository\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "WebSearch",
+      "WebFetch(domain:lucide.dev)",
+      "Bash(git commit -m \"$(cat <<''EOF''\n🔧 Fix: Sostituito CDN Lucide con componenti SVG inline\n\nCorrezioni:\n- Rimosso CDN lucide-react non funzionante\n- Creati 13 componenti icona SVG inline (ChevronLeft, ChevronRight, Home, Menu, X, Code, Box, GitBranch, Link2, Eye, Lock, Layers, Zap)\n- IconWrapper per standardizzare dimensioni e stili\n- Nessuna dipendenza esterna necessaria per le icone\n\nLe icone ora sono integrate direttamente nel codice e funzionano correttamente.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit:*)",
+      "Bash(for file in slides/*.jsx)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)",
+      "Bash(for file in quizzes/*.jsx)",
+      "Bash(tail:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

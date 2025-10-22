@@ -4,6 +4,7 @@
 // No custom icons needed - this quiz uses plain HTML elements and text
 
 const costruttoriQuizSlide = {
+  isQuiz: true,
   title: "Quiz: Costruttori e Properties",
   content: function() {
     const React = window.React;

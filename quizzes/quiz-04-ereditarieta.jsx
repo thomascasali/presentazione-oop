@@ -6,6 +6,7 @@
 // No custom icons needed - this quiz uses emojis and HTML radio buttons
 
 const ereditarietaQuizSlide = {
+  isQuiz: true,
   title: "Quiz: Ereditarieta e Polimorfismo",
   subtitle: "Verifica le tue conoscenze",
   content: (

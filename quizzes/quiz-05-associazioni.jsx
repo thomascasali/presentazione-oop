@@ -817,6 +817,7 @@ const AssociazioniQuizMain = () => {
 // ============================================================================
 
 const associazioniQuizSlide = {
+  isQuiz: true,
   title: "Quiz Interattivo: Associazioni tra Classi",
   subtitle: "Aggregazione, Composizione, Relazioni N-M - Test Finale!",
   content: <AssociazioniQuizMain />

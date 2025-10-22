@@ -45,7 +45,7 @@ const OOPPresentation = () => {
   // Verifico che esistano le variabili globali
 
   const dashboardSlide = window.dashboardSlide || {
-    type: 'dashboard',
+    isDashboard: true,
     title: 'Dashboard non disponibile',
     content: React.createElement('div', null, 'Dashboard mancante')
   };
@@ -398,24 +398,77 @@ const OOPPresentation = () => {
         'main',
         { key: 'main', className: 'slide-content' },
         currentSlideData
-          ? currentSlideData.type === 'dashboard'
-            ? // Dashboard: passa callback per navigazione
-              React.createElement(currentSlideData.content, {
-                onNavigateToModule: (moduleIndex) => {
-                  // Trova la sezione del modulo
-                  const moduleSection = sections.find(
-                    (s) => s.type === 'module' && sections.indexOf(s) === moduleIndex
-                  );
-                  if (moduleSection) {
-                    goToSlide(moduleSection.startSlide);
-                  }
-                }
-              })
-            : currentSlideData.type === 'quiz'
-            ? // Quiz: renderizza direttamente
-              React.createElement(currentSlideData.content)
-            : // Slide normale: renderizza content
-              currentSlideData.content
+          ? currentSlideData.isDashboard
+            ? // Dashboard: renderizza a schermo intero senza wrapper
+              typeof currentSlideData.content === 'function'
+                ? React.createElement(currentSlideData.content, {
+                    onNavigateToModule: (moduleKey) => {
+                      // Map moduleKey to slide index
+                      const moduleMap = {
+                        fondamenti: fondamentiSlides.length > 0 ? 1 : null,
+                        costruttori: fondamentiSlides.length > 0
+                          ? 1 + fondamentiSlides.length + (fondamentiQuizSlide ? 1 : 0)
+                          : null,
+                        metodi: costruttoriPropertiesSlides.length > 0
+                          ? 1 + fondamentiSlides.length + (fondamentiQuizSlide ? 1 : 0) +
+                            costruttoriPropertiesSlides.length + (costruttoriQuizSlide ? 1 : 0)
+                          : null,
+                        ereditarieta: metodiIncapsulamentoSlides.length > 0
+                          ? 1 + fondamentiSlides.length + (fondamentiQuizSlide ? 1 : 0) +
+                            costruttoriPropertiesSlides.length + (costruttoriQuizSlide ? 1 : 0) +
+                            metodiIncapsulamentoSlides.length + (metodiQuizSlide ? 1 : 0)
+                          : null,
+                        associazioni: ereditarietaPolimorfismoSlides.length > 0
+                          ? 1 + fondamentiSlides.length + (fondamentiQuizSlide ? 1 : 0) +
+                            costruttoriPropertiesSlides.length + (costruttoriQuizSlide ? 1 : 0) +
+                            metodiIncapsulamentoSlides.length + (metodiQuizSlide ? 1 : 0) +
+                            ereditarietaPolimorfismoSlides.length + (ereditarietaQuizSlide ? 1 : 0)
+                          : null
+                      };
+                      const slideIndex = moduleMap[moduleKey];
+                      if (slideIndex !== null && slideIndex !== undefined) {
+                        goToSlide(slideIndex);
+                      }
+                    }
+                  })
+                : currentSlideData.content
+            : currentSlideData.isQuiz || currentSlideData.type === 'quiz'
+            ? // Quiz: renderizza a schermo intero senza wrapper
+              typeof currentSlideData.content === 'function'
+                ? React.createElement(currentSlideData.content)
+                : currentSlideData.content
+            : // Slide normale: renderizza con wrapper titolo
+              React.createElement(
+                'div',
+                { className: 'slide-inner' },
+                [
+                  // Intestazione slide
+                  currentSlideData.title &&
+                    React.createElement(
+                      'div',
+                      { key: 'slide-header', className: 'slide-header mb-6' },
+                      [
+                        React.createElement(
+                          'h2',
+                          { key: 'title', className: 'text-4xl font-bold text-white mb-2' },
+                          currentSlideData.title
+                        ),
+                        currentSlideData.subtitle &&
+                          React.createElement(
+                            'p',
+                            { key: 'subtitle', className: 'text-xl text-gray-400' },
+                            currentSlideData.subtitle
+                          )
+                      ]
+                    ),
+                  // Contenuto
+                  React.createElement(
+                    'div',
+                    { key: 'slide-body', className: 'slide-body' },
+                    currentSlideData.content
+                  )
+                ]
+              )
           : React.createElement(
               'div',
               { className: 'error-slide' },

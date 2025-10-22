@@ -619,6 +619,7 @@ const BachecaDiscussione = () => {
 // ========== SLIDE PRINCIPALE CHE COMBINA TUTTO ==========
 
 const metodiQuizSlide = {
+  isQuiz: true,
   title: "Quiz e Discussione: Metodi e Incapsulamento",
   subtitle: "Metti alla prova le tue conoscenze",
   content: (
