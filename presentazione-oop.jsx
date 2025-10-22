@@ -114,7 +114,7 @@ const OOPPresentation = () => {
           <p className="text-lg text-gray-300">In UML, una classe è rappresentata con un rettangolo diviso in tre sezioni:</p>
           
           <div className="flex justify-center my-8">
-            <svg width="400" height="350" className="bg-gray-800/30 rounded-xl p-4">
+            <svg width="400" height="380" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 400 350">
               {/* Rettangolo principale */}
               <rect x="50" y="20" width="300" height="300" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="3" rx="8"/>
               
@@ -1736,7 +1736,7 @@ conto.movimenti.Clear();`}
 
             <div className="bg-gray-900 p-6 rounded-xl border border-cyan-500/30">
               <h4 className="text-lg font-bold mb-4 text-cyan-300">Notazione UML</h4>
-              <svg width="100%" height="300" className="bg-gray-800/30 rounded-lg">
+              <svg width="100%" height="320" className="bg-gray-800/30 rounded-lg" viewBox="0 0 320 300">
                 <rect x="20" y="10" width="280" height="270" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
                 <text x="30" y="35" fill="#93c5fd" fontSize="18" fontWeight="bold">Classe</text>
                 <line x1="20" y1="45" x2="300" y2="45" stroke="#60a5fa" strokeWidth="2"/>
@@ -1998,7 +1998,7 @@ class Admin : Utente
           </div>
 
           <div className="flex justify-center my-6">
-            <svg width="600" height="300" className="bg-gray-800/30 rounded-xl p-4">
+            <svg width="600" height="330" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 600 300">
               {/* Classe base */}
               <rect x="220" y="20" width="160" height="100" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="3" rx="6"/>
               <text x="300" y="50" textAnchor="middle" fill="white" fontSize="18" fontWeight="bold">Veicolo</text>
@@ -2329,7 +2329,7 @@ public class Automobile : VeicoloAMotore
           </div>
 
           <div className="flex justify-center mt-6">
-            <svg width="500" height="250" className="bg-gray-800/30 rounded-xl p-4">
+            <svg width="500" height="280" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 500 250">
               {/* Livello 1 */}
               <rect x="170" y="10" width="160" height="50" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
               <text x="250" y="40" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Veicolo</text>
@@ -2954,7 +2954,7 @@ foreach(Prodotto p in carrello)
           </div>
 
           <div className="flex justify-center">
-            <svg width="600" height="120" className="bg-gray-800/30 rounded-xl p-4">
+            <svg width="600" height="140" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 600 120">
               {/* Associazione semplice */}
               <rect x="20" y="30" width="120" height="60" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
               <text x="80" y="65" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Studente</text>
@@ -2985,7 +2985,7 @@ foreach(Prodotto p in carrello)
           </div>
 
           <div className="flex justify-center mb-6">
-            <svg width="500" height="100" className="bg-gray-800/30 rounded-xl p-4">
+            <svg width="500" height="120" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 500 100">
               <rect x="50" y="20" width="140" height="60" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
               <text x="120" y="55" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Squadra</text>
               
@@ -3092,7 +3092,7 @@ g1.StampaInfo();  // Mario Rossi esiste ancora!`}
           </div>
 
           <div className="flex justify-center mb-6">
-            <svg width="500" height="100" className="bg-gray-800/30 rounded-xl p-4">
+            <svg width="500" height="120" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 500 100">
               <rect x="50" y="20" width="140" height="60" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
               <text x="120" y="55" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Automobile</text>
               
@@ -3318,7 +3318,7 @@ c2.MostraStudenti();   // Database -> Mario, Laura`}
           </div>
 
           <div className="flex justify-center">
-            <svg width="600" height="180" className="bg-gray-800/30 rounded-xl p-4">
+            <svg width="600" height="210" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 600 180">
               {/* Studenti */}
               <rect x="50" y="10" width="120" height="40" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
               <text x="110" y="35" textAnchor="middle" fill="white" fontSize="13">Mario</text>
