@@ -8,12 +8,12 @@ Presentazione interattiva sulla Programmazione ad Oggetti con C# e UML, pensata 
 
 ## 📚 Contenuti
 
-La presentazione copre **46+ slide** organizzate in **5 moduli tematici + 5 quiz interattivi**:
+La presentazione copre **41 slide** organizzate in **5 moduli tematici + 5 quiz interattivi**:
 
 ### 🎯 Modulo 0: Dashboard (1 slide)
    - Dashboard interattiva con card animate
    - Navigazione diretta ai moduli
-   - Statistiche corso (40+ slide, 5 quiz, ~90min)
+   - Statistiche corso (41 slide, 5 quiz, ~90min)
 
 ### 📦 Modulo 1: Fondamenti (8 slide + quiz)
    - **Introduzione OOP**: C# 12.0, UML 2.5, .NET 8
@@ -45,12 +45,11 @@ La presentazione copre **46+ slide** organizzate in **5 moduli tematici + 5 quiz
    - **Type casting**: Upcasting, downcasting, is/as
    - **Quiz Interattivo**: Scelta multipla, Esercizi override, Flashcards, Bacheca
 
-### 🔗 Modulo 5: Associazioni e Riepilogo (5 slide + quiz)
+### 🔗 Modulo 5: Associazioni (4 slide + quiz)
    - **Aggregazione**: Rombo vuoto (◇), vita indipendente
    - **Composizione**: Rombo pieno (◆), vita dipendente
    - **Relazioni N-M**: Studenti ↔ Corsi
-   - **Riepilogo finale**: I 4 pilastri OOP, roadmap futuro
-   - **Quiz Interattivo**: Scelta multipla, Indovina tipo relazione, Congratulazioni
+   - **Quiz Interattivo**: Scelta multipla, Indovina tipo relazione, Tab finale con congratulazioni e riepilogo
 
 ## 🚀 Caratteristiche
 
@@ -78,12 +77,14 @@ La presentazione copre **46+ slide** organizzate in **5 moduli tematici + 5 quiz
 - ✅ **Sistema di punteggio** e percentuali
 
 ### 🧭 Navigazione
-- ✅ **Progress bar animata** con percentuale completamento
+- ✅ **Progress bar animata** con percentuale completamento e cliccabile
+- ✅ **Salto diretto tramite textbox** (digita numero slide 1-41 e premi "Vai")
+- ✅ **Progress bar interattiva** (clicca ovunque sulla barra per saltare a quella posizione)
 - ✅ **Frecce prev/next** con keyboard shortcuts (←/→)
 - ✅ **Home button** per tornare alla dashboard
 - ✅ **Menu laterale** con indice completo e sottosezioni
-- ✅ **Contatore slide** (es. "5 / 46")
-- ✅ **Salto diretto** a qualsiasi slide dal menu
+- ✅ **Contatore slide** (es. "5 / 41")
+- ✅ **Hover effects** sulla progress bar (si ingrandisce per facilitare il clic)
 
 ## 💻 Tecnologie
 
@@ -128,9 +129,10 @@ Visita: **https://thomascasali.github.io/presentazione-oop/**
 ### Navigazione
 
 - **Frecce** ← → per navigare tra le slide
+- **Textbox numerica** - Digita un numero da 1 a 41 e premi "Vai" per saltare direttamente a quella slide
+- **Progress bar cliccabile** - Clicca su qualsiasi punto della barra di avanzamento per saltare a quella posizione
 - **Home button** per tornare alla dashboard
 - **Menu laterale** (icona ☰) per accedere all'indice completo
-- **Progress bar** per vedere l'avanzamento
 - **Dashboard** con card cliccabili per saltare alle sezioni
 
 ## 📄 Struttura File
@@ -146,9 +148,9 @@ presentazione-oop/
 │   ├── 00-dashboard.jsx          # Dashboard interattiva (1 slide)
 │   ├── 01-fondamenti.jsx         # Classi, Oggetti, Attributi (8 slide)
 │   ├── 02-costruttori-properties.jsx  # Costruttori e Properties (8 slide)
-│   ├── 03-metodi-incapsulamento.jsx   # Metodi, Incapsulamento, Visibilità (10 slide)
+│   ├── 03-metodi-incapsulamento.jsx   # Metodi, Incapsulamento, Visibilità (8 slide)
 │   ├── 04-ereditarieta-polimorfismo.jsx  # Ereditarietà e Polimorfismo (9 slide)
-│   └── 05-associazioni-riepilogo.jsx    # Associazioni e Riepilogo (5 slide)
+│   └── 05-associazioni-riepilogo.jsx    # Associazioni (4 slide)
 │
 ├── quizzes/                       # Quiz interattivi
 │   ├── quiz-01-fondamenti.jsx    # Quiz scelta multipla + memory game + bacheca
@@ -190,6 +192,26 @@ Ogni quiz contiene:
 - Sezioni multiple (quiz, esercizi, bacheca)
 - Feedback immediato con spiegazioni
 - Sistema di punteggio e valutazione
+
+## 🔄 Miglioramenti Recenti (v2.0 - Gennaio 2025)
+
+### Bug Fixes Critici
+- ✅ **Risolti export mancanti** - Aggiunti `window.export` a tutti i 12 moduli (slide + quiz + dashboard)
+- ✅ **Fixate variabili globali duplicate** - Quiz-01 e Quiz-05 avevano nomi identici che causavano conflitti
+- ✅ **Convertito Quiz-02 a dark mode** - 31 proprietà di stile convertite da light a dark theme
+- ✅ **Fixato rendering Quiz-02** - Gestione corretta del pattern function factory
+- ✅ **Rimossa slide ridondante** - Congratulazioni ora integrate nel tab finale del Quiz-05
+
+### Nuove Funzionalità
+- ✨ **Navigazione diretta tramite textbox** - Input numerico 1-41 con validazione e pulsante "Vai"
+- ✨ **Progress bar cliccabile** - Clicca ovunque sulla barra per saltare a quella slide
+- ✨ **Hover effects migliorati** - Progress bar si ingrandisce al passaggio del mouse
+- ✨ **Cache busting** - Versioning degli script (?v=2) per aggiornamenti immediati
+
+### Ottimizzazioni
+- 📦 **Slide count ottimizzato** - Da 46 a 41 slide eliminando duplicati
+- 🎨 **Styling unificato** - Tutti i quiz ora usano tema dark coerente
+- 🔧 **Architettura migliorata** - Variabili con naming conventions univoche per modulo
 
 ## 🎓 Target Audience
 
@@ -250,15 +272,28 @@ GitHub Pages si aggiorna automaticamente dopo il push.
 **La presentazione non si carica (rotella infinita)?**
 - Verifica che tutti i CDN siano raggiungibili
 - Controlla la console del browser per errori
-- Assicurati di non usare `import/export` ES6 nel JSX (usa variabili globali da CDN)
+- Assicurati che tutti i moduli abbiano l'export `window.moduleName` alla fine del file
+- Verifica che non ci siano errori di sintassi JSX nei file caricati
 
-**Le icone non appaiono?**
-- Verifica che il CDN di Lucide React sia caricato in `index.html`
-- Usa la sintassi `const { IconName } = lucide;`
+**Quiz mostra contenuti sbagliati?**
+- Verifica che ogni quiz usi nomi univoci per le variabili globali (es. `fondamentiQuizQuestions`, non solo `quizQuestions`)
+- Controlla che non ci siano duplicati di nomi di funzioni/componenti tra diversi file quiz
+- Prova un hard refresh (Ctrl+F5 o Cmd+Shift+R) per svuotare la cache
 
-**Errori Babel?**
-- Assicurati che lo script sia di tipo `text/babel`
-- Verifica la sintassi JSX (chiusura tag, key props, etc.)
+**Quiz illeggibile o con colori strani?**
+- Verifica che gli stili siano ottimizzati per dark mode (background scuri, testo chiaro)
+- Controlla che non ci siano conflitti tra stili inline e Tailwind CSS
+- I quiz dovrebbero usare colori con trasparenza (rgba) per adattarsi al tema
+
+**Le modifiche non si vedono dopo un push?**
+- GitHub Pages può richiedere 1-2 minuti per l'aggiornamento
+- Fai un hard refresh del browser per svuotare la cache
+- Controlla che i file siano stati effettivamente modificati su GitHub
+
+**Errori di export/import?**
+- NON usare `import/export` ES6 - Babel Standalone non li supporta
+- Usa sempre pattern `window.moduleName = moduleName` per esporre variabili globali
+- Verifica che l'ordine di caricamento degli script in `index.html` sia corretto
 
 ## 📝 Licenza
 
