@@ -37,7 +37,7 @@ const ChevronLeft = (props) => <IconWrapper {...props}><polyline points="15 18 9
 // QUIZ A SCELTA MULTIPLA
 // ============================================================================
 
-const quizQuestions = [
+const fondamentiQuizQuestions = [
   {
     question: "Cos'è una CLASSE nella programmazione orientata agli oggetti?",
     options: [
@@ -106,7 +106,7 @@ const quizQuestions = [
   }
 ];
 
-const MultipleChoiceQuiz = () => {
+const FondamentiMultipleChoiceQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -122,7 +122,7 @@ const MultipleChoiceQuiz = () => {
   const handleSubmit = () => {
     if (selectedAnswer === null) return;
 
-    const isCorrect = selectedAnswer === quizQuestions[currentQuestion].correct;
+    const isCorrect = selectedAnswer === fondamentiQuizQuestions[currentQuestion].correct;
     setShowFeedback(true);
 
     const newAnswers = [...answers, {
@@ -138,7 +138,7 @@ const MultipleChoiceQuiz = () => {
   };
 
   const handleNext = () => {
-    if (currentQuestion < quizQuestions.length - 1) {
+    if (currentQuestion < fondamentiQuizQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
       setShowFeedback(false);
@@ -157,7 +157,7 @@ const MultipleChoiceQuiz = () => {
   };
 
   if (quizCompleted) {
-    const percentage = Math.round((score / quizQuestions.length) * 100);
+    const percentage = Math.round((score / fondamentiQuizQuestions.length) * 100);
     let message, color, emoji;
 
     if (percentage >= 90) {
@@ -185,7 +185,7 @@ const MultipleChoiceQuiz = () => {
           <h3 className="text-3xl font-bold mb-4 text-white">Quiz Completato!</h3>
           <div className="text-6xl font-bold mb-4">
             <span className={`text-${color}-400`}>{score}</span>
-            <span className="text-gray-400 text-4xl">/{quizQuestions.length}</span>
+            <span className="text-gray-400 text-4xl">/{fondamentiQuizQuestions.length}</span>
           </div>
           <div className={`text-2xl font-semibold mb-4 text-${color}-300`}>
             {percentage}%
@@ -193,7 +193,7 @@ const MultipleChoiceQuiz = () => {
           <p className="text-xl text-gray-300 mb-6">{message}</p>
 
           <div className="flex items-center justify-center gap-4 mb-6">
-            {[...Array(quizQuestions.length)].map((_, i) => {
+            {[...Array(fondamentiQuizQuestions.length)].map((_, i) => {
               const ans = answers.find(a => a.question === i);
               return (
                 <div
@@ -222,15 +222,15 @@ const MultipleChoiceQuiz = () => {
     );
   }
 
-  const question = quizQuestions[currentQuestion];
-  const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+  const question = fondamentiQuizQuestions[currentQuestion];
+  const progress = ((currentQuestion + 1) / fondamentiQuizQuestions.length) * 100;
 
   return (
     <div className="space-y-6">
       {/* Progress Bar */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm text-gray-400">
-          <span>Domanda {currentQuestion + 1} di {quizQuestions.length}</span>
+          <span>Domanda {currentQuestion + 1} di {fondamentiQuizQuestions.length}</span>
           <span>Punteggio: {score}/{currentQuestion}</span>
         </div>
         <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
@@ -338,7 +338,7 @@ const MultipleChoiceQuiz = () => {
               onClick={handleNext}
               className="flex-1 bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-500 hover:to-cyan-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
             >
-              {currentQuestion < quizQuestions.length - 1 ? (
+              {currentQuestion < fondamentiQuizQuestions.length - 1 ? (
                 <>
                   Prossima Domanda
                   <ChevronRight className="w-5 h-5" />
@@ -847,7 +847,7 @@ const FondamentiQuizMain = () => {
 
       {/* Content */}
       <div className="min-h-[600px]">
-        {activeTab === 'quiz' && <MultipleChoiceQuiz />}
+        {activeTab === 'quiz' && <FondamentiMultipleChoiceQuiz />}
         {activeTab === 'memory' && <MemoryGame />}
         {activeTab === 'discussion' && <DiscussionBoard />}
       </div>
