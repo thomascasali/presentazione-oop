@@ -429,12 +429,12 @@ const costruttoriQuizSlide = {
           borderBottomColor: '#667eea'
         },
         questionCard: {
-          background: 'white',
+          background: 'rgba(30, 41, 59, 0.8)',
           borderRadius: '12px',
           padding: '30px',
           marginBottom: '24px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          border: '1px solid #e2e8f0',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+          border: '1px solid rgba(59, 130, 246, 0.3)',
           transition: 'all 0.3s ease'
         },
         questionNumber: {
@@ -453,7 +453,7 @@ const costruttoriQuizSlide = {
         questionText: {
           fontSize: '18px',
           fontWeight: '600',
-          color: '#1e293b',
+          color: '#e2e8f0',
           marginBottom: '20px',
           lineHeight: '1.6'
         },
@@ -461,39 +461,41 @@ const costruttoriQuizSlide = {
           padding: '16px 20px',
           margin: '10px 0',
           borderRadius: '8px',
-          border: '2px solid #e2e8f0',
+          border: '2px solid rgba(71, 85, 105, 0.5)',
           cursor: 'pointer',
           transition: 'all 0.2s ease',
           fontSize: '16px',
-          background: 'white'
+          background: 'rgba(51, 65, 85, 0.5)',
+          color: '#e2e8f0'
         },
         optionHover: {
           borderColor: '#667eea',
-          background: '#f8f9ff'
+          background: 'rgba(102, 126, 234, 0.2)'
         },
         optionSelected: {
           borderColor: '#667eea',
-          background: '#f0f2ff',
-          fontWeight: '600'
+          background: 'rgba(102, 126, 234, 0.3)',
+          fontWeight: '600',
+          color: '#a5b4fc'
         },
         optionCorrect: {
           borderColor: '#10b981',
-          background: '#f0fdf4',
-          color: '#059669'
+          background: 'rgba(16, 185, 129, 0.2)',
+          color: '#6ee7b7'
         },
         optionWrong: {
           borderColor: '#ef4444',
-          background: '#fef2f2',
-          color: '#dc2626'
+          background: 'rgba(239, 68, 68, 0.2)',
+          color: '#fca5a5'
         },
         explanation: {
           marginTop: '16px',
           padding: '16px',
           borderRadius: '8px',
-          background: '#f8fafc',
+          background: 'rgba(30, 41, 59, 0.6)',
           borderLeft: '4px solid #667eea',
           fontSize: '15px',
-          color: '#475569',
+          color: '#cbd5e1',
           lineHeight: '1.6'
         },
         submitButton: {
@@ -515,8 +517,8 @@ const costruttoriQuizSlide = {
           border: '2px solid #667eea',
           borderRadius: '8px',
           cursor: 'pointer',
-          background: 'white',
-          color: '#667eea',
+          background: 'rgba(30, 41, 59, 0.8)',
+          color: '#a5b4fc',
           transition: 'all 0.3s ease',
           marginLeft: '12px'
         },
@@ -554,41 +556,42 @@ const costruttoriQuizSlide = {
           padding: '10px',
           fontSize: '14px',
           fontFamily: '"Fira Code", "Courier New", monospace',
-          border: '2px solid #e2e8f0',
+          border: '2px solid rgba(71, 85, 105, 0.5)',
           borderRadius: '6px',
           marginTop: '8px',
-          background: '#f8fafc',
+          background: 'rgba(30, 41, 59, 0.6)',
+          color: '#e2e8f0',
           transition: 'all 0.2s ease'
         },
         codeInputFocused: {
           borderColor: '#667eea',
           outline: 'none',
-          background: 'white'
+          background: 'rgba(30, 41, 59, 0.8)'
         },
         hint: {
           padding: '12px 16px',
           margin: '8px 0',
-          background: '#fef3c7',
+          background: 'rgba(245, 158, 11, 0.2)',
           borderLeft: '4px solid #f59e0b',
           borderRadius: '4px',
           fontSize: '14px',
-          color: '#92400e'
+          color: '#fcd34d'
         },
         discussionSection: {
           marginBottom: '40px'
         },
         discussionCategory: {
-          background: 'white',
+          background: 'rgba(30, 41, 59, 0.8)',
           borderRadius: '12px',
           padding: '30px',
           marginBottom: '24px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          border: '1px solid #e2e8f0'
+          boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+          border: '1px solid rgba(59, 130, 246, 0.3)'
         },
         categoryTitle: {
           fontSize: '24px',
           fontWeight: '700',
-          color: '#1e293b',
+          color: '#e2e8f0',
           marginBottom: '20px',
           display: 'flex',
           alignItems: 'center',
@@ -608,9 +611,9 @@ const costruttoriQuizSlide = {
         listItem: {
           padding: '12px 0',
           fontSize: '16px',
-          color: '#475569',
+          color: '#cbd5e1',
           lineHeight: '1.6',
-          borderBottom: '1px solid #f1f5f9'
+          borderBottom: '1px solid rgba(71, 85, 105, 0.3)'
         },
         buttonContainer: {
           display: 'flex',
