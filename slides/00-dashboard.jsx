@@ -344,3 +344,8 @@ const dashboardSlide = {
   isDashboard: true,
   content: (props) => <Dashboard {...props} />
 };
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.dashboardSlide = dashboardSlide;
+}

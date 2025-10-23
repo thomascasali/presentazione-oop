@@ -823,3 +823,8 @@ private const string VERSIONE = "1.0";`} />
     )
   }
 ];
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.fondamentiSlides = fondamentiSlides;
+}

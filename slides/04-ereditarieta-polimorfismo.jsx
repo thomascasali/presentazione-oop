@@ -1128,3 +1128,8 @@ foreach(Prodotto p in carrello)
     )
   }
 ];
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.ereditarietaPolimorfismoSlides = ereditarietaPolimorfismoSlides;
+}

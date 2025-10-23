@@ -550,3 +550,8 @@ mario.IscriviACorso(db);     // Mario -> Database`}
     )
   }
 ];
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.associazioniRiepilogoSlides = associazioniRiepilogoSlides;
+}

@@ -502,7 +502,14 @@ const OOPPresentation = () => {
             : currentSlideData.isQuiz || currentSlideData.type === 'quiz'
             ? // Quiz: renderizza a schermo intero senza wrapper
               typeof currentSlideData.content === 'function'
-                ? React.createElement(currentSlideData.content)
+                ? (() => {
+                    // Se content è una funzione, chiamala
+                    const result = currentSlideData.content();
+                    // Se il risultato è ancora una funzione (component), creala
+                    return typeof result === 'function'
+                      ? React.createElement(result)
+                      : result;
+                  })()
                 : currentSlideData.content
             : // Slide normale: renderizza con wrapper e intestazione
               React.createElement(

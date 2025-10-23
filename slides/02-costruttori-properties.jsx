@@ -1034,3 +1034,8 @@ const costruttoriPropertiesSlides = [
   slide15,  // Auto-Implemented Properties
   slide16   // Read-Only e Init Properties
 ];
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.costruttoriPropertiesSlides = costruttoriPropertiesSlides;
+}

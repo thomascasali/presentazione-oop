@@ -1330,3 +1330,8 @@ public class ProdottoGood
     )
   }
 ];
+
+// Esporta per main.jsx
+if (typeof window !== 'undefined') {
+  window.metodiIncapsulamentoSlides = metodiIncapsulamentoSlides;
+}
