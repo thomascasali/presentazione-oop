@@ -175,8 +175,8 @@ const Dashboard = ({ onNavigateToModule }) => {
     {
       number: 1,
       title: "Fondamenti",
-      subtitle: "Classi, Oggetti e Attributi",
-      slides: 8,
+      subtitle: "4 Pilastri OOP, Classi, Oggetti",
+      slides: 10,
       icon: Box,
       color: "blue",
       moduleKey: "fondamenti"
@@ -202,8 +202,8 @@ const Dashboard = ({ onNavigateToModule }) => {
     {
       number: 4,
       title: "Ereditarieta e Polimorfismo",
-      subtitle: "Riuso del codice e Flessibilita",
-      slides: 9,
+      subtitle: "Interfacce, Classi Astratte, UML",
+      slides: 12,
       icon: Layers,
       color: "orange",
       moduleKey: "ereditarieta"
@@ -212,7 +212,7 @@ const Dashboard = ({ onNavigateToModule }) => {
       number: 5,
       title: "Associazioni",
       subtitle: "Relazioni tra oggetti + Riepilogo",
-      slides: 5,
+      slides: 4,
       icon: Link2,
       color: "indigo",
       moduleKey: "associazioni"

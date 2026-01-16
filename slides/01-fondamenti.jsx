@@ -152,7 +152,121 @@ const fondamentiSlides = [
     )
   },
 
-  // Slide 2 - Classi e Oggetti - Concetti Base
+  // Slide 2 - I 4 Pilastri della OOP
+  {
+    title: "I 4 Pilastri della OOP",
+    subtitle: "I principi fondamentali della programmazione ad oggetti",
+    content: (
+      <div className="space-y-6">
+        <FadeIn delay={0}>
+          <div className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 p-6 rounded-xl border border-blue-500/30">
+            <div className="flex items-center gap-3 mb-4">
+              <Brain className="w-8 h-8 text-cyan-400" />
+              <p className="text-xl text-gray-300">
+                La OOP si basa su <span className="text-cyan-400 font-bold">4 pilastri fondamentali</span> che permettono di creare software modulare, riutilizzabile e manutenibile.
+              </p>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={200}>
+          <div className="grid grid-cols-2 gap-6">
+            {/* Incapsulamento */}
+            <div className="bg-gradient-to-br from-red-900/40 to-red-800/20 p-6 rounded-xl border-2 border-red-500/50 hover:scale-105 transition-transform">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🔒</span>
+                </div>
+                <h3 className="text-2xl font-bold text-red-300">1. Incapsulamento</h3>
+              </div>
+              <p className="text-gray-300 mb-3">
+                <span className="text-red-400 font-semibold">Nascondere i dati interni</span> dell'oggetto e fornire un'interfaccia controllata per accedervi.
+              </p>
+              <div className="bg-gray-900/50 p-3 rounded-lg border border-red-500/30">
+                <p className="text-sm text-gray-400">
+                  <span className="text-red-400">Esempio:</span> Gli attributi sono <code className="text-red-300">private</code>, l'accesso avviene tramite metodi/properties
+                </p>
+              </div>
+            </div>
+
+            {/* Astrazione */}
+            <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/20 p-6 rounded-xl border-2 border-blue-500/50 hover:scale-105 transition-transform">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🎯</span>
+                </div>
+                <h3 className="text-2xl font-bold text-blue-300">2. Astrazione</h3>
+              </div>
+              <p className="text-gray-300 mb-3">
+                <span className="text-blue-400 font-semibold">Mostrare solo l'essenziale</span>, nascondendo la complessità dell'implementazione.
+              </p>
+              <div className="bg-gray-900/50 p-3 rounded-lg border border-blue-500/30">
+                <p className="text-sm text-gray-400">
+                  <span className="text-blue-400">Esempio:</span> Guidare un'auto senza conoscere il funzionamento del motore
+                </p>
+              </div>
+            </div>
+
+            {/* Ereditarietà */}
+            <div className="bg-gradient-to-br from-green-900/40 to-green-800/20 p-6 rounded-xl border-2 border-green-500/50 hover:scale-105 transition-transform">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🧬</span>
+                </div>
+                <h3 className="text-2xl font-bold text-green-300">3. Ereditarietà</h3>
+              </div>
+              <p className="text-gray-300 mb-3">
+                <span className="text-green-400 font-semibold">Creare nuove classi</span> basandosi su classi esistenti, ereditandone attributi e metodi.
+              </p>
+              <div className="bg-gray-900/50 p-3 rounded-lg border border-green-500/30">
+                <p className="text-sm text-gray-400">
+                  <span className="text-green-400">Esempio:</span> <code className="text-green-300">Cane</code> eredita da <code className="text-green-300">Animale</code>
+                </p>
+              </div>
+            </div>
+
+            {/* Polimorfismo */}
+            <div className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 p-6 rounded-xl border-2 border-purple-500/50 hover:scale-105 transition-transform">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🎭</span>
+                </div>
+                <h3 className="text-2xl font-bold text-purple-300">4. Polimorfismo</h3>
+              </div>
+              <p className="text-gray-300 mb-3">
+                <span className="text-purple-400 font-semibold">Stessa interfaccia, comportamenti diversi</span> in base al tipo reale dell'oggetto.
+              </p>
+              <div className="bg-gray-900/50 p-3 rounded-lg border border-purple-500/30">
+                <p className="text-sm text-gray-400">
+                  <span className="text-purple-400">Esempio:</span> <code className="text-purple-300">Disegna()</code> funziona diversamente per Cerchio e Quadrato
+                </p>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={400}>
+          <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 p-5 rounded-xl border border-yellow-500/30">
+            <div className="flex items-start gap-3">
+              <Lightbulb className="w-8 h-8 text-yellow-400 flex-shrink-0" />
+              <div>
+                <p className="text-yellow-400 font-bold mb-2">Perché sono importanti?</p>
+                <p className="text-gray-300">
+                  Questi 4 pilastri lavorano insieme per creare codice <span className="text-yellow-400 font-semibold">modulare</span>,
+                  <span className="text-yellow-400 font-semibold"> riutilizzabile</span>,
+                  <span className="text-yellow-400 font-semibold"> sicuro</span> e
+                  <span className="text-yellow-400 font-semibold"> facile da manutenere</span>.
+                  Li approfondiremo tutti durante questo corso!
+                </p>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    )
+  },
+
+  // Slide 3 - Classi e Oggetti - Concetti Base
   {
     title: "Classi e Oggetti",
     subtitle: "Il fondamento della OOP",
@@ -481,7 +595,149 @@ alleato.RiceviDanno(10);`} />
     )
   },
 
-  // Slide 6 - Tipi di Attributi
+  // Slide 6 - Perché gli Attributi sono Private?
+  {
+    title: "Perché gli Attributi sono Private?",
+    subtitle: "L'incapsulamento nella pratica",
+    content: (
+      <div className="space-y-6">
+        <FadeIn delay={0}>
+          <div className="bg-gradient-to-r from-red-900/30 to-orange-900/30 p-6 rounded-xl border-l-4 border-red-500">
+            <div className="flex items-center gap-3 mb-4">
+              <Target className="w-8 h-8 text-red-400" />
+              <h3 className="text-2xl font-bold text-red-300">Il Problema: Attributi Pubblici</h3>
+            </div>
+            <p className="text-lg text-gray-300">
+              Se gli attributi fossero <span className="text-red-400 font-bold">public</span>, chiunque potrebbe modificarli direttamente,
+              causando <span className="text-red-400 font-semibold">stati inconsistenti</span> e <span className="text-red-400 font-semibold">bug difficili da trovare</span>.
+            </p>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={200}>
+          <div className="grid grid-cols-2 gap-6">
+            {/* Esempio SBAGLIATO */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold">✗</span>
+                </div>
+                <h4 className="text-xl font-bold text-red-300">SBAGLIATO: Attributi Pubblici</h4>
+              </div>
+              <CodeBlock code={`public class ContoBancario
+{
+    public double saldo;  // Pubblico!
+    public string titolare;
+}
+
+// PROBLEMA: Accesso diretto
+ContoBancario conto = new ContoBancario();
+conto.saldo = -5000;     // Saldo negativo? OK!
+conto.saldo = 999999999; // Milioni dal nulla!
+conto.titolare = "";     // Titolare vuoto!
+
+// Nessun controllo, nessuna validazione!`} />
+              <div className="bg-red-900/30 p-3 rounded-lg border border-red-500/30">
+                <p className="text-sm text-red-300 font-semibold">
+                  Chiunque può mettere valori assurdi senza alcun controllo!
+                </p>
+              </div>
+            </div>
+
+            {/* Esempio CORRETTO */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold">✓</span>
+                </div>
+                <h4 className="text-xl font-bold text-green-300">CORRETTO: Attributi Privati</h4>
+              </div>
+              <CodeBlock code={`public class ContoBancario
+{
+    private double saldo;  // Privato!
+    private string titolare;
+
+    public bool Deposita(double importo)
+    {
+        if (importo > 0)  // Validazione!
+        {
+            saldo += importo;
+            return true;
+        }
+        return false;
+    }
+
+    public bool Preleva(double importo)
+    {
+        if (importo > 0 && saldo >= importo)
+        {
+            saldo -= importo;
+            return true;
+        }
+        return false;  // Fondi insufficienti!
+    }
+}`} />
+              <div className="bg-green-900/30 p-3 rounded-lg border border-green-500/30">
+                <p className="text-sm text-green-300 font-semibold">
+                  Ogni modifica passa attraverso metodi che validano i dati!
+                </p>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={400}>
+          <div className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 p-6 rounded-xl border border-blue-500/30">
+            <h4 className="text-xl font-bold text-cyan-300 mb-4 flex items-center gap-2">
+              <Lightbulb className="w-6 h-6" />
+              Vantaggi dell'Incapsulamento
+            </h4>
+            <div className="grid grid-cols-4 gap-4">
+              <div className="bg-blue-900/30 p-4 rounded-lg text-center">
+                <div className="text-3xl mb-2">🛡️</div>
+                <p className="font-bold text-blue-300 mb-1">Protezione</p>
+                <p className="text-xs text-gray-400">Dati protetti da modifiche accidentali</p>
+              </div>
+              <div className="bg-cyan-900/30 p-4 rounded-lg text-center">
+                <div className="text-3xl mb-2">✅</div>
+                <p className="font-bold text-cyan-300 mb-1">Validazione</p>
+                <p className="text-xs text-gray-400">Controlli centralizzati sui dati</p>
+              </div>
+              <div className="bg-blue-900/30 p-4 rounded-lg text-center">
+                <div className="text-3xl mb-2">🔧</div>
+                <p className="font-bold text-blue-300 mb-1">Flessibilità</p>
+                <p className="text-xs text-gray-400">Cambiare implementazione senza rompere il codice</p>
+              </div>
+              <div className="bg-cyan-900/30 p-4 rounded-lg text-center">
+                <div className="text-3xl mb-2">🐛</div>
+                <p className="font-bold text-cyan-300 mb-1">Debug Facile</p>
+                <p className="text-xs text-gray-400">Un solo punto dove cercare errori</p>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={600}>
+          <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 p-4 rounded-xl border border-yellow-500/30">
+            <div className="flex items-start gap-3">
+              <Award className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-1" />
+              <div>
+                <p className="text-yellow-400 font-bold mb-1">Regola d'Oro:</p>
+                <p className="text-sm text-gray-300">
+                  <span className="text-yellow-400 font-semibold">Attributi sempre private</span>, accesso controllato tramite
+                  <span className="text-cyan-400 font-semibold"> metodi</span> o
+                  <span className="text-cyan-400 font-semibold"> properties</span> (che vedremo nel prossimo modulo).
+                  Questo è il <span className="text-yellow-400 font-semibold">principio di incapsulamento</span> in azione!
+                </p>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    )
+  },
+
+  // Slide 7 - Tipi di Attributi
   {
     title: "Tipi di Attributi",
     subtitle: "Attributi di istanza vs attributi di classe (static)",

@@ -1,4 +1,4 @@
-const { useState, useEffect } = React;
+const { useState, useEffect, useCallback } = React;
 
 // ==================== ICONE INLINE ====================
 const ChevronLeft = () => (
@@ -35,16 +35,48 @@ const HomeIcon = () => (
   </svg>
 );
 
+const HelpIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+  </svg>
+);
+
+const TrophyIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+    <path d="M4 22h16"></path>
+    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+  </svg>
+);
+
+const KeyboardIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+    <path d="M6 8h.001"></path>
+    <path d="M10 8h.001"></path>
+    <path d="M14 8h.001"></path>
+    <path d="M18 8h.001"></path>
+    <path d="M8 12h.001"></path>
+    <path d="M12 12h.001"></path>
+    <path d="M16 12h.001"></path>
+    <path d="M7 16h10"></path>
+  </svg>
+);
+
 // ==================== COMPONENTE PRINCIPALE ====================
 const OOPPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const [jumpToSlide, setJumpToSlide] = useState('');
+  const [globalScore, setGlobalScore] = useState({ correct: 0, total: 0 });
 
   // ==================== CARICAMENTO MODULI ====================
-  // I moduli sono caricati tramite <script> in index.html
-  // Verifico che esistano le variabili globali
-
   const dashboardSlide = window.dashboardSlide || {
     isDashboard: true,
     title: 'Dashboard non disponibile',
@@ -68,17 +100,17 @@ const OOPPresentation = () => {
 
   // ==================== COSTRUZIONE ARRAY SLIDES ====================
   const allSlides = [
-    dashboardSlide, // Slide 0
-    ...fondamentiSlides, // Slides 1-8
-    ...(fondamentiQuizSlide ? [fondamentiQuizSlide] : []), // Slide 9
-    ...costruttoriPropertiesSlides, // Slides 10-17
-    ...(costruttoriQuizSlide ? [costruttoriQuizSlide] : []), // Slide 18
-    ...metodiIncapsulamentoSlides, // Slides 19-26
-    ...(metodiQuizSlide ? [metodiQuizSlide] : []), // Slide 27
-    ...ereditarietaPolimorfismoSlides, // Slides 28-35
-    ...(ereditarietaQuizSlide ? [ereditarietaQuizSlide] : []), // Slide 36
-    ...associazioniRiepilogoSlides, // Slides 37-44
-    ...(associazioniQuizSlide ? [associazioniQuizSlide] : []), // Slide 45
+    dashboardSlide,
+    ...fondamentiSlides,
+    ...(fondamentiQuizSlide ? [fondamentiQuizSlide] : []),
+    ...costruttoriPropertiesSlides,
+    ...(costruttoriQuizSlide ? [costruttoriQuizSlide] : []),
+    ...metodiIncapsulamentoSlides,
+    ...(metodiQuizSlide ? [metodiQuizSlide] : []),
+    ...ereditarietaPolimorfismoSlides,
+    ...(ereditarietaQuizSlide ? [ereditarietaQuizSlide] : []),
+    ...associazioniRiepilogoSlides,
+    ...(associazioniQuizSlide ? [associazioniQuizSlide] : []),
   ];
 
   // ==================== CALCOLO INDICE SEZIONI ====================
@@ -90,7 +122,8 @@ const OOPPresentation = () => {
     title: 'Dashboard',
     startSlide: slideIndex,
     slideCount: 1,
-    type: 'dashboard'
+    type: 'dashboard',
+    moduleNumber: 0
   });
   slideIndex += 1;
 
@@ -100,7 +133,8 @@ const OOPPresentation = () => {
       title: 'Fondamenti OOP',
       startSlide: slideIndex,
       slideCount: fondamentiSlides.length,
-      type: 'module'
+      type: 'module',
+      moduleNumber: 1
     });
     slideIndex += fondamentiSlides.length;
   }
@@ -110,7 +144,8 @@ const OOPPresentation = () => {
       title: 'Quiz - Fondamenti',
       startSlide: slideIndex,
       slideCount: 1,
-      type: 'quiz'
+      type: 'quiz',
+      moduleNumber: 1
     });
     slideIndex += 1;
   }
@@ -121,7 +156,8 @@ const OOPPresentation = () => {
       title: 'Costruttori e Properties',
       startSlide: slideIndex,
       slideCount: costruttoriPropertiesSlides.length,
-      type: 'module'
+      type: 'module',
+      moduleNumber: 2
     });
     slideIndex += costruttoriPropertiesSlides.length;
   }
@@ -131,7 +167,8 @@ const OOPPresentation = () => {
       title: 'Quiz - Costruttori',
       startSlide: slideIndex,
       slideCount: 1,
-      type: 'quiz'
+      type: 'quiz',
+      moduleNumber: 2
     });
     slideIndex += 1;
   }
@@ -142,7 +179,8 @@ const OOPPresentation = () => {
       title: 'Metodi e Incapsulamento',
       startSlide: slideIndex,
       slideCount: metodiIncapsulamentoSlides.length,
-      type: 'module'
+      type: 'module',
+      moduleNumber: 3
     });
     slideIndex += metodiIncapsulamentoSlides.length;
   }
@@ -152,28 +190,31 @@ const OOPPresentation = () => {
       title: 'Quiz - Metodi',
       startSlide: slideIndex,
       slideCount: 1,
-      type: 'quiz'
+      type: 'quiz',
+      moduleNumber: 3
     });
     slideIndex += 1;
   }
 
-  // Ereditarietà e Polimorfismo
+  // Ereditarieta e Polimorfismo
   if (ereditarietaPolimorfismoSlides.length > 0) {
     sections.push({
-      title: 'Ereditarietà e Polimorfismo',
+      title: 'Ereditarieta e Polimorfismo',
       startSlide: slideIndex,
       slideCount: ereditarietaPolimorfismoSlides.length,
-      type: 'module'
+      type: 'module',
+      moduleNumber: 4
     });
     slideIndex += ereditarietaPolimorfismoSlides.length;
   }
 
   if (ereditarietaQuizSlide) {
     sections.push({
-      title: 'Quiz - Ereditarietà',
+      title: 'Quiz - Ereditarieta',
       startSlide: slideIndex,
       slideCount: 1,
-      type: 'quiz'
+      type: 'quiz',
+      moduleNumber: 4
     });
     slideIndex += 1;
   }
@@ -184,7 +225,8 @@ const OOPPresentation = () => {
       title: 'Associazioni e Riepilogo',
       startSlide: slideIndex,
       slideCount: associazioniRiepilogoSlides.length,
-      type: 'module'
+      type: 'module',
+      moduleNumber: 5
     });
     slideIndex += associazioniRiepilogoSlides.length;
   }
@@ -194,10 +236,59 @@ const OOPPresentation = () => {
       title: 'Quiz - Associazioni',
       startSlide: slideIndex,
       slideCount: 1,
-      type: 'quiz'
+      type: 'quiz',
+      moduleNumber: 5
     });
     slideIndex += 1;
   }
+
+  // ==================== PROGRESS TRACKING ====================
+  useEffect(() => {
+    // Load saved progress
+    const savedSlide = localStorage.getItem('oop-current-slide');
+    const savedScore = localStorage.getItem('oop-global-score');
+
+    if (savedSlide) {
+      const slideNum = parseInt(savedSlide);
+      if (!isNaN(slideNum) && slideNum < allSlides.length) {
+        setCurrentSlide(slideNum);
+      }
+    }
+
+    if (savedScore) {
+      try {
+        setGlobalScore(JSON.parse(savedScore));
+      } catch (e) {
+        console.error('Error loading score:', e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save current progress
+    localStorage.setItem('oop-current-slide', currentSlide.toString());
+  }, [currentSlide]);
+
+  // ==================== CALCOLO NUMERAZIONE MODULO ====================
+  const getModuleSlideInfo = useCallback(() => {
+    const currentSection = sections.find(
+      (section) =>
+        currentSlide >= section.startSlide &&
+        currentSlide < section.startSlide + section.slideCount
+    );
+
+    if (!currentSection) {
+      return { moduleSlide: currentSlide + 1, moduleTotal: allSlides.length, moduleName: '' };
+    }
+
+    const slideInModule = currentSlide - currentSection.startSlide + 1;
+    return {
+      moduleSlide: slideInModule,
+      moduleTotal: currentSection.slideCount,
+      moduleName: currentSection.title,
+      moduleNumber: currentSection.moduleNumber
+    };
+  }, [currentSlide, sections]);
 
   // ==================== GESTIONE NAVIGAZIONE ====================
   const goToSlide = (index) => {
@@ -207,17 +298,17 @@ const OOPPresentation = () => {
     }
   };
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (currentSlide < allSlides.length - 1) {
       setCurrentSlide(currentSlide + 1);
     }
-  };
+  }, [currentSlide, allSlides.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
     }
-  };
+  }, [currentSlide]);
 
   const goToDashboard = () => {
     setCurrentSlide(0);
@@ -228,7 +319,7 @@ const OOPPresentation = () => {
     e.preventDefault();
     const slideNum = parseInt(jumpToSlide);
     if (!isNaN(slideNum) && slideNum >= 1 && slideNum <= allSlides.length) {
-      setCurrentSlide(slideNum - 1); // Convert from 1-based to 0-based
+      setCurrentSlide(slideNum - 1);
       setJumpToSlide('');
     }
   };
@@ -241,29 +332,86 @@ const OOPPresentation = () => {
     goToSlide(targetSlide);
   };
 
-  // Gestione tasti freccia
+  // ==================== KEYBOARD SHORTCUTS ====================
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight') {
-        nextSlide();
-      } else if (e.key === 'ArrowLeft') {
-        prevSlide();
-      } else if (e.key === 'Home') {
-        goToDashboard();
-      } else if (e.key === 'Escape') {
-        setShowMenu(false);
+      // Don't handle if user is typing in input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+        return;
+      }
+
+      switch (e.key) {
+        case 'ArrowRight':
+        case ' ':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToDashboard();
+          break;
+        case 'Escape':
+          setShowMenu(false);
+          setShowHelp(false);
+          break;
+        case 'm':
+        case 'M':
+          setShowMenu(!showMenu);
+          break;
+        case '?':
+        case 'h':
+        case 'H':
+          setShowHelp(!showHelp);
+          break;
+        case 'f':
+        case 'F':
+          // Toggle fullscreen
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            document.documentElement.requestFullscreen();
+          }
+          break;
+        default:
+          // Number keys 1-5 for quick module navigation
+          if (e.key >= '1' && e.key <= '5') {
+            const moduleNum = parseInt(e.key);
+            const targetSection = sections.find(s => s.moduleNumber === moduleNum && s.type === 'module');
+            if (targetSection) {
+              goToSlide(targetSection.startSlide);
+            }
+          }
+          break;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSlide]);
+  }, [currentSlide, showMenu, showHelp, nextSlide, prevSlide]);
+
+  // ==================== GLOBAL SCORE MANAGEMENT ====================
+  const updateGlobalScore = useCallback((correct, total) => {
+    setGlobalScore(prev => {
+      const newScore = { correct: prev.correct + correct, total: prev.total + total };
+      localStorage.setItem('oop-global-score', JSON.stringify(newScore));
+      return newScore;
+    });
+  }, []);
+
+  // Expose to window for quiz components
+  useEffect(() => {
+    window.updateGlobalScore = updateGlobalScore;
+  }, [updateGlobalScore]);
 
   // ==================== RENDERING ====================
   const currentSlideData = allSlides[currentSlide];
   const progress = ((currentSlide + 1) / allSlides.length) * 100;
+  const moduleInfo = getModuleSlideInfo();
 
-  // Trova la sezione corrente per il menu
   const currentSection = sections.find(
     (section) =>
       currentSlide >= section.startSlide &&
@@ -286,7 +434,8 @@ const OOPPresentation = () => {
               key: 'menu-btn',
               className: 'icon-button',
               onClick: () => setShowMenu(!showMenu),
-              'aria-label': 'Toggle menu'
+              'aria-label': 'Toggle menu',
+              title: 'Menu (M)'
             },
             showMenu ? React.createElement(XIcon) : React.createElement(MenuIcon)
           ),
@@ -305,6 +454,18 @@ const OOPPresentation = () => {
               className: 'progress-bar',
               style: { width: `${progress}%` }
             })
+          ),
+
+          // Global Score Badge
+          globalScore.total > 0 && React.createElement(
+            'div',
+            { key: 'score-badge', className: 'score-badge', title: 'Punteggio Quiz' },
+            [
+              React.createElement(TrophyIcon, { key: 'trophy' }),
+              React.createElement('span', { key: 'score' },
+                `${globalScore.correct}/${globalScore.total}`
+              )
+            ]
           ),
 
           // Jump to Slide Form
@@ -358,16 +519,19 @@ const OOPPresentation = () => {
               className: 'icon-button',
               onClick: goToDashboard,
               'aria-label': 'Go to dashboard',
+              title: 'Dashboard (Home)',
               disabled: currentSlide === 0
             },
             React.createElement(HomeIcon)
           ),
 
-          // Slide Counter
+          // Slide Counter - Module based
           React.createElement(
             'div',
-            { key: 'counter', className: 'slide-counter' },
-            `${currentSlide + 1} / ${allSlides.length}`
+            { key: 'counter', className: 'slide-counter', title: `Slide globale: ${currentSlide + 1}/${allSlides.length}` },
+            moduleInfo.moduleNumber > 0
+              ? `M${moduleInfo.moduleNumber}: ${moduleInfo.moduleSlide}/${moduleInfo.moduleTotal}`
+              : `${currentSlide + 1}/${allSlides.length}`
           )
         ]
       ),
@@ -420,21 +584,22 @@ const OOPPresentation = () => {
                         React.createElement(
                           'span',
                           { key: 'title', className: 'menu-item-title' },
-                          section.title
+                          section.moduleNumber > 0 ? `${section.moduleNumber}. ${section.title}` : section.title
                         ),
                         React.createElement(
                           'span',
                           { key: 'count', className: 'menu-item-count' },
-                          section.slideCount > 1
-                            ? `${section.slideCount} slides`
-                            : '1 slide'
+                          section.type === 'quiz' ? 'Quiz' :
+                          section.slideCount > 1 ? `${section.slideCount} slides` : '1 slide'
                         )
                       ]
                     ),
 
-                    // Sub-slides per moduli
+                    // Sub-slides per moduli (collapsed by default, expanded when active)
                     section.type === 'module' &&
                       section.slideCount > 1 &&
+                      currentSlide >= section.startSlide &&
+                      currentSlide < section.startSlide + section.slideCount &&
                       React.createElement(
                         'div',
                         { key: 'sub-slides', className: 'menu-sub-items' },
@@ -449,7 +614,7 @@ const OOPPresentation = () => {
                               }`,
                               onClick: () => goToSlide(slideIdx)
                             },
-                            `Slide ${i + 1}`
+                            `${i + 1}. ${allSlides[slideIdx]?.title || `Slide ${i + 1}`}`
                           );
                         })
                       )
@@ -466,11 +631,9 @@ const OOPPresentation = () => {
         { key: 'main', className: 'slide-content' },
         currentSlideData
           ? currentSlideData.isDashboard
-            ? // Dashboard: renderizza a schermo intero senza wrapper
-              typeof currentSlideData.content === 'function'
+            ? typeof currentSlideData.content === 'function'
                 ? React.createElement(currentSlideData.content, {
                     onNavigateToModule: (moduleKey) => {
-                      // Map moduleKey to slide index
                       const moduleMap = {
                         fondamenti: fondamentiSlides.length > 0 ? 1 : null,
                         costruttori: fondamentiSlides.length > 0
@@ -500,23 +663,18 @@ const OOPPresentation = () => {
                   })
                 : currentSlideData.content
             : currentSlideData.isQuiz || currentSlideData.type === 'quiz'
-            ? // Quiz: renderizza a schermo intero senza wrapper
-              typeof currentSlideData.content === 'function'
+            ? typeof currentSlideData.content === 'function'
                 ? (() => {
-                    // Se content è una funzione, chiamala
                     const result = currentSlideData.content();
-                    // Se il risultato è ancora una funzione (component), creala
                     return typeof result === 'function'
                       ? React.createElement(result)
                       : result;
                   })()
                 : currentSlideData.content
-            : // Slide normale: renderizza con wrapper e intestazione
-              React.createElement(
+            : React.createElement(
                 'div',
                 { className: 'slide-inner' },
                 [
-                  // Intestazione slide
                   currentSlideData.title &&
                     React.createElement(
                       'div',
@@ -535,7 +693,6 @@ const OOPPresentation = () => {
                           )
                       ]
                     ),
-                  // Contenuto
                   React.createElement(
                     'div',
                     { key: 'slide-body' },
@@ -597,6 +754,67 @@ const OOPPresentation = () => {
         ]
       ),
 
+      // ==================== KEYBOARD SHORTCUTS HELP ====================
+      showHelp &&
+        React.createElement(
+          'div',
+          { key: 'shortcuts', className: 'shortcuts-panel' },
+          [
+            React.createElement(
+              'h3',
+              { key: 'title' },
+              [
+                React.createElement(KeyboardIcon, { key: 'icon' }),
+                'Scorciatoie Tastiera'
+              ]
+            ),
+            React.createElement('div', { key: 'items' }, [
+              React.createElement('div', { key: 's1', className: 'shortcut-item' }, [
+                React.createElement('span', { key: 'k', className: 'shortcut-key' }, '←'),
+                React.createElement('span', { key: 'd', className: 'shortcut-desc' }, 'Slide precedente')
+              ]),
+              React.createElement('div', { key: 's2', className: 'shortcut-item' }, [
+                React.createElement('span', { key: 'k', className: 'shortcut-key' }, '→'),
+                React.createElement('span', { key: 'd', className: 'shortcut-desc' }, 'Slide successiva')
+              ]),
+              React.createElement('div', { key: 's3', className: 'shortcut-item' }, [
+                React.createElement('span', { key: 'k', className: 'shortcut-key' }, 'Home'),
+                React.createElement('span', { key: 'd', className: 'shortcut-desc' }, 'Vai alla dashboard')
+              ]),
+              React.createElement('div', { key: 's4', className: 'shortcut-item' }, [
+                React.createElement('span', { key: 'k', className: 'shortcut-key' }, 'M'),
+                React.createElement('span', { key: 'd', className: 'shortcut-desc' }, 'Apri/chiudi menu')
+              ]),
+              React.createElement('div', { key: 's5', className: 'shortcut-item' }, [
+                React.createElement('span', { key: 'k', className: 'shortcut-key' }, 'F'),
+                React.createElement('span', { key: 'd', className: 'shortcut-desc' }, 'Schermo intero')
+              ]),
+              React.createElement('div', { key: 's6', className: 'shortcut-item' }, [
+                React.createElement('span', { key: 'k', className: 'shortcut-key' }, '1-5'),
+                React.createElement('span', { key: 'd', className: 'shortcut-desc' }, 'Vai al modulo')
+              ]),
+              React.createElement('div', { key: 's7', className: 'shortcut-item' }, [
+                React.createElement('span', { key: 'k', className: 'shortcut-key' }, 'Esc'),
+                React.createElement('span', { key: 'd', className: 'shortcut-desc' }, 'Chiudi pannelli')
+              ])
+            ])
+          ]
+        ),
+
+      // ==================== HELP TOGGLE BUTTON ====================
+      !showHelp &&
+        React.createElement(
+          'button',
+          {
+            key: 'help-toggle',
+            className: 'help-toggle',
+            onClick: () => setShowHelp(true),
+            'aria-label': 'Mostra scorciatoie',
+            title: 'Scorciatoie tastiera (?)'
+          },
+          '?'
+        ),
+
       // ==================== OVERLAY MENU ====================
       showMenu &&
         React.createElement('div', {
@@ -609,5 +827,3 @@ const OOPPresentation = () => {
 };
 
 // ==================== RENDERING ROOT ====================
-// Questo componente è pronto per essere renderizzato con:
-// ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(OOPPresentation));
