@@ -532,6 +532,20 @@ const OOPPresentation = () => {
             moduleInfo.moduleNumber > 0
               ? `M${moduleInfo.moduleNumber}: ${moduleInfo.moduleSlide}/${moduleInfo.moduleTotal}`
               : `${currentSlide + 1}/${allSlides.length}`
+          ),
+
+          // Help Button (in header)
+          React.createElement(
+            'button',
+            {
+              key: 'help-btn',
+              className: 'icon-button',
+              onClick: () => setShowHelp(!showHelp),
+              'aria-label': 'Mostra scorciatoie',
+              title: 'Scorciatoie tastiera (?)',
+              style: { marginLeft: '0.5rem' }
+            },
+            '?'
           )
         ]
       ),
@@ -799,20 +813,6 @@ const OOPPresentation = () => {
               ])
             ])
           ]
-        ),
-
-      // ==================== HELP TOGGLE BUTTON ====================
-      !showHelp &&
-        React.createElement(
-          'button',
-          {
-            key: 'help-toggle',
-            className: 'help-toggle',
-            onClick: () => setShowHelp(true),
-            'aria-label': 'Mostra scorciatoie',
-            title: 'Scorciatoie tastiera (?)'
-          },
-          '?'
         ),
 
       // ==================== OVERLAY MENU ====================
