@@ -1126,6 +1126,371 @@ foreach(Prodotto p in carrello)
         </div>
       </div>
     )
+  },
+
+  // Slide 10/12 - Classi Astratte
+  {
+    title: "Classi Astratte",
+    subtitle: "Template per le classi derivate",
+    content: (
+      <div className="space-y-6">
+        <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 p-8 rounded-2xl border-2 border-purple-400/50 shadow-lg">
+          <h3 className="text-3xl font-bold mb-6 text-purple-300 flex items-center gap-3">
+            <span className="text-4xl">📋</span> Cos'e una Classe Astratta?
+          </h3>
+          <p className="text-xl text-gray-200 leading-relaxed">
+            Una classe astratta e una classe <span className="text-purple-400 font-bold">incompleta</span> che non puo essere istanziata direttamente.
+            Serve come <span className="text-pink-400 font-bold">template</span> per le classi derivate, definendo un contratto che devono rispettare.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-6">
+          <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 p-6 rounded-xl border-2 border-blue-400/50 shadow-lg">
+            <h3 className="text-xl font-bold mb-4 text-blue-300 flex items-center gap-2">
+              <span className="text-2xl">📝</span> Caratteristiche
+            </h3>
+            <ul className="space-y-3 text-gray-300">
+              <li className="flex items-start gap-2">
+                <span className="text-blue-400 text-xl">✓</span>
+                <span>Dichiarata con keyword <code className="text-cyan-400 bg-gray-900 px-2 rounded">abstract</code></span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-400 text-xl">✓</span>
+                <span>NON puo essere istanziata (<code className="text-red-400">new ClasseAstratta()</code> = ERRORE)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-400 text-xl">✓</span>
+                <span>Puo contenere metodi <span className="text-blue-400 font-bold">astratti</span> (senza implementazione)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-400 text-xl">✓</span>
+                <span>Puo contenere metodi <span className="text-cyan-400 font-bold">concreti</span> (con implementazione)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-400 text-xl">✓</span>
+                <span>Le classi derivate <span className="text-yellow-400 font-bold">devono</span> implementare tutti i metodi astratti</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-gray-900 p-6 rounded-xl border-2 border-cyan-500/50 shadow-lg">
+            <h4 className="text-lg font-bold mb-4 text-cyan-300 flex items-center gap-2">
+              <span className="text-2xl">💻</span> Esempio Base
+            </h4>
+            <div className="font-mono text-sm">
+              <pre className="text-gray-300">
+{`public abstract class Forma
+{
+    // Proprieta comune a tutte le forme
+    public string Colore { get; set; }
+
+    // Metodo ASTRATTO - DEVE essere implementato
+    public abstract double CalcolaArea();
+
+    // Metodo CONCRETO - Gia implementato
+    public void Descrivi()
+    {
+        Console.WriteLine($"Sono una forma di colore {Colore}");
+        Console.WriteLine($"La mia area e: {CalcolaArea()}");
+    }
+}
+
+public class Rettangolo : Forma
+{
+    public double Base { get; set; }
+    public double Altezza { get; set; }
+
+    // OBBLIGATORIO: implementare CalcolaArea()
+    public override double CalcolaArea()
+    {
+        return Base * Altezza;
+    }
+}
+
+// Forma f = new Forma();  // ERRORE!
+Rettangolo r = new Rettangolo();
+r.Base = 5;
+r.Altezza = 3;
+r.Descrivi();  // Usa il metodo concreto ereditato`}
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 p-5 rounded-xl border-l-4 border-yellow-400">
+          <p className="text-yellow-200 flex items-start gap-2">
+            <span className="text-2xl">💡</span>
+            <span className="text-lg">
+              <strong>Quando usare:</strong> Quando hai comportamenti comuni che vuoi condividere, ma anche metodi che <span className="text-yellow-400 font-bold">devono</span> essere implementati diversamente da ogni classe derivata.
+            </span>
+          </p>
+        </div>
+      </div>
+    )
+  },
+
+  // Slide 11/12 - Interfacce
+  {
+    title: "Interfacce (Interface)",
+    subtitle: "Contratti per le classi",
+    content: (
+      <div className="space-y-6">
+        <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 p-8 rounded-2xl border-2 border-cyan-400/50 shadow-lg">
+          <h3 className="text-3xl font-bold mb-6 text-cyan-300 flex items-center gap-3">
+            <span className="text-4xl">📜</span> Cos'e un'Interfaccia?
+          </h3>
+          <p className="text-xl text-gray-200 leading-relaxed">
+            Un'interfaccia e un <span className="text-cyan-400 font-bold">contratto</span> che definisce <span className="text-blue-400 font-bold">cosa</span> una classe deve fare,
+            senza specificare <span className="text-pink-400 font-bold">come</span>. Contiene solo firme di metodi/proprieta, nessuna implementazione.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 p-6 rounded-xl border-2 border-green-400/50 shadow-lg">
+              <h3 className="text-xl font-bold mb-4 text-green-300 flex items-center gap-2">
+                <span className="text-2xl">✅</span> Vantaggi delle Interfacce
+              </h3>
+              <ul className="space-y-2 text-gray-300">
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span><strong className="text-green-300">Ereditarieta multipla:</strong> Una classe puo implementare MOLTE interfacce</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span><strong className="text-green-300">Disaccoppiamento:</strong> Codice piu flessibile e testabile</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span><strong className="text-green-300">Polimorfismo:</strong> Trattare oggetti diversi in modo uniforme</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span><strong className="text-green-300">Contratto chiaro:</strong> Documenta le capacita di una classe</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-900 p-5 rounded-xl border border-gray-700">
+              <h4 className="text-lg font-bold mb-3 text-cyan-300">Sintassi</h4>
+              <div className="font-mono text-sm">
+                <pre className="text-gray-300">
+{`// Convenzione: nome inizia con "I"
+public interface INomeInterfaccia
+{
+    // Solo firme, niente implementazione
+    void Metodo();
+    int Proprieta { get; set; }
+}
+
+// Implementazione
+public class MiaClasse : IInterfaccia1, IInterfaccia2
+{
+    // DEVE implementare TUTTI i membri
+}`}
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-900 p-6 rounded-xl border-2 border-cyan-500/50 shadow-lg">
+            <h4 className="text-xl font-bold mb-4 text-cyan-300 flex items-center gap-2">
+              <span className="text-2xl">🔌</span> Esempio: Sistema di Pagamenti
+            </h4>
+            <div className="font-mono text-xs">
+              <pre className="text-gray-300">
+{`// Interfaccia: definisce IL CONTRATTO
+public interface IMetodoPagamento
+{
+    bool Paga(double importo);
+    string GetNome();
+    bool VerificaFondi(double importo);
+}
+
+// Implementazione 1: Carta di Credito
+public class CartaCredito : IMetodoPagamento
+{
+    private double limite;
+
+    public bool Paga(double importo)
+    {
+        if (VerificaFondi(importo))
+        {
+            limite -= importo;
+            return true;
+        }
+        return false;
+    }
+
+    public string GetNome() => "Carta di Credito";
+    public bool VerificaFondi(double i) => limite >= i;
+}
+
+// Implementazione 2: PayPal
+public class PayPal : IMetodoPagamento
+{
+    private double saldo;
+
+    public bool Paga(double importo)
+    {
+        if (VerificaFondi(importo))
+        {
+            saldo -= importo;
+            return true;
+        }
+        return false;
+    }
+
+    public string GetNome() => "PayPal";
+    public bool VerificaFondi(double i) => saldo >= i;
+}
+
+// POLIMORFISMO con interfacce!
+void ProcessaOrdine(IMetodoPagamento metodo, double totale)
+{
+    Console.WriteLine($"Pagamento con: {metodo.GetNome()}");
+    if (metodo.Paga(totale))
+        Console.WriteLine("Pagamento riuscito!");
+    else
+        Console.WriteLine("Pagamento fallito!");
+}
+
+// Funziona con QUALSIASI IMetodoPagamento!
+ProcessaOrdine(new CartaCredito(), 100);
+ProcessaOrdine(new PayPal(), 50);`}
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-purple-900/20 p-5 rounded-lg border-l-4 border-purple-400">
+            <h4 className="font-bold text-purple-300 mb-2 text-lg">Classe Astratta</h4>
+            <ul className="text-sm text-gray-300 space-y-1">
+              <li>• Puo avere implementazione</li>
+              <li>• Ereditarieta singola</li>
+              <li>• Puo avere costruttori</li>
+              <li>• Puo avere campi</li>
+            </ul>
+          </div>
+          <div className="bg-cyan-900/20 p-5 rounded-lg border-l-4 border-cyan-400">
+            <h4 className="font-bold text-cyan-300 mb-2 text-lg">Interfaccia</h4>
+            <ul className="text-sm text-gray-300 space-y-1">
+              <li>• Solo firme (nessuna implementazione*)</li>
+              <li>• Implementazione multipla</li>
+              <li>• Niente costruttori</li>
+              <li>• Niente campi (solo proprieta)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    )
+  },
+
+  // Slide 12/12 - Diagramma UML di Sequenza
+  {
+    title: "Diagrammi UML di Sequenza",
+    subtitle: "Visualizzare le interazioni tra oggetti nel tempo",
+    content: (
+      <div className="space-y-6">
+        <div className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 p-6 rounded-xl border-l-4 border-blue-400">
+          <h3 className="text-2xl font-bold mb-4 text-blue-300 flex items-center gap-2">
+            <span className="text-3xl">📊</span> Cos'e un Diagramma di Sequenza?
+          </h3>
+          <p className="text-lg text-gray-300">
+            Un diagramma di sequenza mostra come gli <span className="text-cyan-400 font-bold">oggetti interagiscono</span> tra loro nel tempo,
+            visualizzando lo <span className="text-blue-400 font-bold">scambio di messaggi</span> (chiamate a metodi) in ordine cronologico.
+          </p>
+        </div>
+
+        <div className="flex justify-center">
+          <svg width="700" height="400" className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl p-4" viewBox="0 0 700 380">
+            {/* Titolo */}
+            <text x="350" y="25" textAnchor="middle" fill="#22d3ee" fontSize="16" fontWeight="bold">Esempio: Processo di Login</text>
+
+            {/* Attori/Oggetti */}
+            <rect x="50" y="40" width="100" height="40" fill="#1e40af" stroke="#60a5fa" strokeWidth="2" rx="5"/>
+            <text x="100" y="65" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">:Utente</text>
+
+            <rect x="250" y="40" width="100" height="40" fill="#0e7490" stroke="#22d3ee" strokeWidth="2" rx="5"/>
+            <text x="300" y="65" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">:LoginForm</text>
+
+            <rect x="450" y="40" width="100" height="40" fill="#0e7490" stroke="#22d3ee" strokeWidth="2" rx="5"/>
+            <text x="500" y="65" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">:AuthService</text>
+
+            <rect x="600" y="40" width="80" height="40" fill="#065f46" stroke="#34d399" strokeWidth="2" rx="5"/>
+            <text x="640" y="65" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">:Database</text>
+
+            {/* Linee di vita (lifelines) */}
+            <line x1="100" y1="80" x2="100" y2="360" stroke="#60a5fa" strokeWidth="2" strokeDasharray="5,5"/>
+            <line x1="300" y1="80" x2="300" y2="360" stroke="#22d3ee" strokeWidth="2" strokeDasharray="5,5"/>
+            <line x1="500" y1="80" x2="500" y2="360" stroke="#22d3ee" strokeWidth="2" strokeDasharray="5,5"/>
+            <line x1="640" y1="80" x2="640" y2="360" stroke="#34d399" strokeWidth="2" strokeDasharray="5,5"/>
+
+            {/* Messaggio 1: inserisciCredenziali */}
+            <line x1="100" y1="120" x2="290" y2="120" stroke="#fbbf24" strokeWidth="2" markerEnd="url(#arrowSeq)"/>
+            <text x="195" y="110" textAnchor="middle" fill="#fbbf24" fontSize="12">1: inserisciCredenziali(user, pwd)</text>
+            <rect x="290" y="115" width="20" height="60" fill="#0e7490" stroke="#22d3ee" strokeWidth="1"/>
+
+            {/* Messaggio 2: valida */}
+            <line x1="310" y1="140" x2="490" y2="140" stroke="#22d3ee" strokeWidth="2" markerEnd="url(#arrowSeq)"/>
+            <text x="400" y="130" textAnchor="middle" fill="#22d3ee" fontSize="12">2: valida(user, pwd)</text>
+            <rect x="490" y="135" width="20" height="80" fill="#0e7490" stroke="#22d3ee" strokeWidth="1"/>
+
+            {/* Messaggio 3: query */}
+            <line x1="510" y1="160" x2="630" y2="160" stroke="#34d399" strokeWidth="2" markerEnd="url(#arrowSeq)"/>
+            <text x="570" y="150" textAnchor="middle" fill="#34d399" fontSize="12">3: trovaUtente(user)</text>
+            <rect x="630" y="155" width="20" height="40" fill="#065f46" stroke="#34d399" strokeWidth="1"/>
+
+            {/* Risposta 3 */}
+            <line x1="630" y1="195" x2="510" y2="195" stroke="#34d399" strokeWidth="2" strokeDasharray="5,3" markerEnd="url(#arrowSeq)"/>
+            <text x="570" y="210" textAnchor="middle" fill="#34d399" fontSize="11">utente trovato</text>
+
+            {/* Risposta 2 */}
+            <line x1="490" y1="230" x2="310" y2="230" stroke="#22d3ee" strokeWidth="2" strokeDasharray="5,3" markerEnd="url(#arrowSeq)"/>
+            <text x="400" y="245" textAnchor="middle" fill="#22d3ee" fontSize="11">autenticato: true</text>
+
+            {/* Messaggio 4: mostra dashboard */}
+            <line x1="290" y1="270" x2="100" y2="270" stroke="#a78bfa" strokeWidth="2" strokeDasharray="5,3" markerEnd="url(#arrowSeq)"/>
+            <text x="195" y="285" textAnchor="middle" fill="#a78bfa" fontSize="12">4: mostraDashboard()</text>
+
+            {/* Legenda */}
+            <rect x="20" y="320" width="660" height="50" fill="rgba(0,0,0,0.3)" rx="5"/>
+            <text x="40" y="340" fill="#fbbf24" fontSize="11">→ Chiamata sincrona</text>
+            <text x="200" y="340" fill="#22d3ee" fontSize="11">- - → Risposta</text>
+            <text x="350" y="340" fill="#60a5fa" fontSize="11">| | Barra attivazione</text>
+            <text x="520" y="340" fill="#9ca3af" fontSize="11">Tempo scorre verso il basso ↓</text>
+
+            <defs>
+              <marker id="arrowSeq" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#22d3ee" />
+              </marker>
+            </defs>
+          </svg>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4">
+          <div className="bg-blue-900/20 p-4 rounded-lg border border-blue-500/30">
+            <h4 className="font-bold text-blue-300 mb-2 flex items-center gap-2">
+              <span className="text-xl">📦</span> Oggetti
+            </h4>
+            <p className="text-sm text-gray-300">Rettangoli in alto con nome :NomeClasse</p>
+          </div>
+          <div className="bg-cyan-900/20 p-4 rounded-lg border border-cyan-500/30">
+            <h4 className="font-bold text-cyan-300 mb-2 flex items-center gap-2">
+              <span className="text-xl">↓</span> Lifeline
+            </h4>
+            <p className="text-sm text-gray-300">Linea tratteggiata verticale (vita dell'oggetto)</p>
+          </div>
+          <div className="bg-purple-900/20 p-4 rounded-lg border border-purple-500/30">
+            <h4 className="font-bold text-purple-300 mb-2 flex items-center gap-2">
+              <span className="text-xl">→</span> Messaggi
+            </h4>
+            <p className="text-sm text-gray-300">Frecce orizzontali = chiamate a metodi</p>
+          </div>
+        </div>
+      </div>
+    )
   }
 ];
 

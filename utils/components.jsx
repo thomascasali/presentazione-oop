@@ -47,12 +47,57 @@ const FadeIn = ({ children, delay = 0, className = "" }) => {
   );
 };
 
-// Componente per code block con syntax highlighting
-const CodeBlock = ({ code, language = "csharp", className = "" }) => (
-  <div className={`bg-gray-900 p-6 rounded-xl border border-blue-500/30 font-mono text-sm overflow-x-auto ${className}`}>
-    <pre className="text-gray-300">{code}</pre>
-  </div>
-);
+// Componente per code block con syntax highlighting e pulsante copia
+const CodeBlock = ({ code, language = "csharp", className = "" }) => {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  // Apply Prism highlighting on mount
+  React.useEffect(() => {
+    if (window.Prism) {
+      window.Prism.highlightAll();
+    }
+  }, [code]);
+
+  return (
+    <div className={`code-block-wrapper bg-gray-900 p-6 rounded-xl border border-blue-500/30 font-mono text-sm overflow-x-auto ${className}`}>
+      <button
+        onClick={handleCopy}
+        className={`copy-button ${copied ? 'copied' : ''}`}
+        title={copied ? 'Copiato!' : 'Copia codice'}
+      >
+        {copied ? (
+          <>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Copiato!
+          </>
+        ) : (
+          <>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copia
+          </>
+        )}
+      </button>
+      <pre className={`language-${language}`}>
+        <code className={`language-${language}`}>{code}</code>
+      </pre>
+    </div>
+  );
+};
 
 // Componente per highlight box
 const HighlightBox = ({ children, color = "blue", icon: Icon, className = "" }) => {
@@ -93,3 +138,220 @@ const InfoCard = ({ title, description, icon: Icon, color = "blue", className = 
     </div>
   );
 };
+
+// Componente Flashcard interattiva
+const Flashcard = ({ front, back, className = "" }) => {
+  const [isFlipped, setIsFlipped] = React.useState(false);
+
+  return (
+    <div
+      className={`flashcard ${isFlipped ? 'flipped' : ''} ${className}`}
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <div className="flashcard-inner">
+        <div className="flashcard-front">
+          <div>
+            <p className="text-sm text-blue-200 mb-2">Clicca per girare</p>
+            <p className="text-xl font-bold text-white">{front}</p>
+          </div>
+        </div>
+        <div className="flashcard-back">
+          <div>
+            <p className="text-sm text-green-200 mb-2">Risposta</p>
+            <p className="text-lg text-white">{back}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Componente FlashcardDeck per gestire un mazzo di flashcards
+const FlashcardDeck = ({ cards, title = "Ripasso Flashcards" }) => {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [completed, setCompleted] = React.useState([]);
+
+  const handleNext = () => {
+    if (currentIndex < cards.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const handleMarkKnown = () => {
+    if (!completed.includes(currentIndex)) {
+      setCompleted([...completed, currentIndex]);
+    }
+    handleNext();
+  };
+
+  const progress = (completed.length / cards.length) * 100;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-bold text-white">{title}</h3>
+        <div className="flex items-center gap-4">
+          <span className="text-sm text-gray-400">
+            {currentIndex + 1} / {cards.length}
+          </span>
+          <span className="text-sm text-green-400">
+            Completate: {completed.length}
+          </span>
+        </div>
+      </div>
+
+      {/* Progress bar */}
+      <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-green-500 to-cyan-500 transition-all duration-300"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      {/* Current flashcard */}
+      <div className="flex justify-center">
+        <Flashcard
+          front={cards[currentIndex].front}
+          back={cards[currentIndex].back}
+          className="w-full max-w-md"
+        />
+      </div>
+
+      {/* Navigation */}
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-colors"
+        >
+          Precedente
+        </button>
+        <button
+          onClick={handleMarkKnown}
+          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors"
+        >
+          Lo so!
+        </button>
+        <button
+          onClick={handleNext}
+          disabled={currentIndex === cards.length - 1}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-500 transition-colors"
+        >
+          Successiva
+        </button>
+      </div>
+
+      {completed.length === cards.length && (
+        <div className="text-center p-4 bg-green-900/30 border border-green-500/50 rounded-xl">
+          <p className="text-green-300 text-xl font-bold">Complimenti! Hai completato tutte le flashcards!</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Componente per Quiz con feedback immediato
+const QuizQuestion = ({ question, options, correctIndex, explanation, onAnswer }) => {
+  const [selected, setSelected] = React.useState(null);
+  const [showFeedback, setShowFeedback] = React.useState(false);
+
+  const handleSelect = (index) => {
+    if (showFeedback) return; // Prevent changing answer after feedback
+
+    setSelected(index);
+    setShowFeedback(true);
+
+    if (onAnswer) {
+      onAnswer(index === correctIndex);
+    }
+  };
+
+  const isCorrect = selected === correctIndex;
+
+  return (
+    <div className="space-y-4">
+      <p className="text-lg text-white font-medium">{question}</p>
+
+      <div className="space-y-2">
+        {options.map((option, index) => {
+          let buttonClass = "w-full p-4 text-left rounded-lg border transition-all ";
+
+          if (!showFeedback) {
+            buttonClass += "bg-gray-800/50 border-gray-600 hover:border-blue-400 hover:bg-blue-900/20 text-white";
+          } else if (index === correctIndex) {
+            buttonClass += "bg-green-900/30 border-green-500 text-green-300";
+          } else if (index === selected && index !== correctIndex) {
+            buttonClass += "bg-red-900/30 border-red-500 text-red-300";
+          } else {
+            buttonClass += "bg-gray-800/30 border-gray-700 text-gray-500";
+          }
+
+          return (
+            <button
+              key={index}
+              onClick={() => handleSelect(index)}
+              className={buttonClass}
+              disabled={showFeedback}
+            >
+              <span className="font-bold mr-2">{String.fromCharCode(65 + index)}.</span>
+              {option}
+              {showFeedback && index === correctIndex && (
+                <span className="float-right text-green-400">✓</span>
+              )}
+              {showFeedback && index === selected && index !== correctIndex && (
+                <span className="float-right text-red-400">✗</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {showFeedback && (
+        <div className={`quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+          <h4>{isCorrect ? 'Corretto!' : 'Sbagliato!'}</h4>
+          <p>{explanation}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Esporta tutti i componenti tramite window
+if (typeof window !== 'undefined') {
+  window.FadeIn = FadeIn;
+  window.CodeBlock = CodeBlock;
+  window.HighlightBox = HighlightBox;
+  window.InfoCard = InfoCard;
+  window.Flashcard = Flashcard;
+  window.FlashcardDeck = FlashcardDeck;
+  window.QuizQuestion = QuizQuestion;
+
+  // Icone
+  window.ChevronLeft = ChevronLeft;
+  window.ChevronRight = ChevronRight;
+  window.Home = Home;
+  window.Menu = Menu;
+  window.X = X;
+  window.Code = Code;
+  window.Box = Box;
+  window.GitBranch = GitBranch;
+  window.Link2 = Link2;
+  window.Eye = Eye;
+  window.Lock = Lock;
+  window.Layers = Layers;
+  window.Zap = Zap;
+  window.CheckCircle = CheckCircle;
+  window.XCircle = XCircle;
+  window.HelpCircle = HelpCircle;
+  window.Award = Award;
+  window.Target = Target;
+  window.Lightbulb = Lightbulb;
+  window.Brain = Brain;
+  window.MessageCircle = MessageCircle;
+}
