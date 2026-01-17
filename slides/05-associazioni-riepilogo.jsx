@@ -46,43 +46,54 @@ const associazioniRiepilogoSlides = [
             <Link2 className="w-10 h-10 mb-3 text-cyan-400" />
             <h4 className="font-bold text-cyan-300 mb-2">Associazione Semplice</h4>
             <p className="text-sm text-gray-300">Relazione generica tra classi</p>
+            <p className="text-xs text-gray-500 mt-2">Es: Persona conosce Persona</p>
           </div>
           <div className="bg-blue-900/30 p-6 rounded-lg border border-blue-500/30">
             <Box className="w-10 h-10 mb-3 text-blue-400" />
-            <h4 className="font-bold text-blue-300 mb-2">Aggregazione</h4>
+            <h4 className="font-bold text-blue-300 mb-2">Aggregazione ◇</h4>
             <p className="text-sm text-gray-300">Relazione "ha un" (debole)</p>
+            <p className="text-xs text-gray-500 mt-2">Es: Squadra ha Giocatori</p>
           </div>
           <div className="bg-cyan-900/30 p-6 rounded-lg border border-cyan-500/30">
             <Layers className="w-10 h-10 mb-3 text-cyan-400" />
-            <h4 className="font-bold text-cyan-300 mb-2">Composizione</h4>
+            <h4 className="font-bold text-cyan-300 mb-2">Composizione ◆</h4>
             <p className="text-sm text-gray-300">Relazione "parte di" (forte)</p>
+            <p className="text-xs text-gray-500 mt-2">Es: Casa ha Stanze</p>
           </div>
         </div>
 
         <div className="bg-gray-900 p-6 rounded-xl border border-blue-500/30">
-          <h4 className="text-xl font-bold mb-4 text-blue-300">Cardinalità delle Associazioni</h4>
+          <h4 className="text-xl font-bold mb-4 text-blue-300">Cardinalità delle Associazioni - Esempi Reali</h4>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="bg-gray-800/50 p-4 rounded">
               <p className="text-cyan-300 font-bold mb-2">1 a 1 (Uno-a-Uno)</p>
               <p className="text-gray-300">Persona ↔ Passaporto</p>
+              <p className="text-gray-300">Utente ↔ ProfiloSettings</p>
+              <p className="text-gray-400 text-xs mt-1">Ogni persona ha un solo passaporto</p>
             </div>
             <div className="bg-gray-800/50 p-4 rounded">
               <p className="text-cyan-300 font-bold mb-2">1 a N (Uno-a-Molti)</p>
               <p className="text-gray-300">Squadra ↔ Giocatori</p>
+              <p className="text-gray-300">Ordine ↔ RigheOrdine</p>
+              <p className="text-gray-400 text-xs mt-1">Una squadra ha molti giocatori</p>
             </div>
             <div className="bg-gray-800/50 p-4 rounded">
               <p className="text-cyan-300 font-bold mb-2">N a 1 (Molti-a-Uno)</p>
-              <p className="text-gray-300">Studenti ↔ Università</p>
+              <p className="text-gray-300">Dipendenti ↔ Dipartimento</p>
+              <p className="text-gray-300">Prodotti ↔ Categoria</p>
+              <p className="text-gray-400 text-xs mt-1">Molti dipendenti in un dipartimento</p>
             </div>
             <div className="bg-gray-800/50 p-4 rounded">
               <p className="text-cyan-300 font-bold mb-2">N a M (Molti-a-Molti)</p>
               <p className="text-gray-300">Studenti ↔ Corsi</p>
+              <p className="text-gray-300">Attori ↔ Film</p>
+              <p className="text-gray-400 text-xs mt-1">Uno studente puo seguire piu corsi</p>
             </div>
           </div>
         </div>
 
         <div className="bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-400">
-          <p className="text-yellow-200"><strong>💡 Ricorda:</strong> Le associazioni modellano le <span className="text-yellow-400 font-bold">relazioni del mondo reale</span> tra gli oggetti!</p>
+          <p className="text-yellow-200"><strong>💡 Ricorda:</strong> Le associazioni modellano le <span className="text-yellow-400 font-bold">relazioni del mondo reale</span> tra gli oggetti! In UML: linea semplice (associazione), rombo vuoto ◇ (aggregazione), rombo pieno ◆ (composizione).</p>
         </div>
       </div>
     )
@@ -176,8 +187,26 @@ g1.StampaInfo();  // Mario Rossi esiste ancora!`}
           </div>
         </div>
 
+        <div className="bg-green-900/20 p-5 rounded-xl border border-green-500/30 mt-4">
+          <h4 className="text-lg font-bold mb-3 text-green-300">Altri Esempi di Aggregazione</h4>
+          <div className="grid grid-cols-3 gap-4 text-sm">
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-green-300 font-bold">Biblioteca ◇ Libri</p>
+              <p className="text-gray-400 text-xs">I libri esistono anche senza biblioteca</p>
+            </div>
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-green-300 font-bold">Aula ◇ Studenti</p>
+              <p className="text-gray-400 text-xs">Gli studenti esistono fuori dall'aula</p>
+            </div>
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-green-300 font-bold">Playlist ◇ Canzoni</p>
+              <p className="text-gray-400 text-xs">Le canzoni esistono in piu playlist</p>
+            </div>
+          </div>
+        </div>
+
         <div className="bg-cyan-900/20 p-4 rounded-lg border-l-4 border-cyan-400">
-          <p className="text-cyan-200"><strong>🔑 Caratteristica chiave:</strong> Rombo <span className="text-cyan-400 font-bold">VUOTO</span> in UML | Oggetti con <span className="text-cyan-400 font-bold">vita indipendente</span></p>
+          <p className="text-cyan-200"><strong>🔑 Caratteristica chiave:</strong> Rombo <span className="text-cyan-400 font-bold">VUOTO ◇</span> in UML | Oggetti con <span className="text-cyan-400 font-bold">vita indipendente</span></p>
         </div>
       </div>
     )
@@ -260,8 +289,26 @@ miaAuto = null;  // Tutto distrutto insieme!`}
           </div>
         </div>
 
+        <div className="bg-purple-900/20 p-5 rounded-xl border border-purple-500/30 mt-4">
+          <h4 className="text-lg font-bold mb-3 text-purple-300">Altri Esempi di Composizione</h4>
+          <div className="grid grid-cols-3 gap-4 text-sm">
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-purple-300 font-bold">Casa ◆ Stanze</p>
+              <p className="text-gray-400 text-xs">Se demolisci la casa, le stanze non esistono piu</p>
+            </div>
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-purple-300 font-bold">Ordine ◆ RigheOrdine</p>
+              <p className="text-gray-400 text-xs">Se annulli l'ordine, le righe spariscono</p>
+            </div>
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-purple-300 font-bold">Fattura ◆ DettagliFattura</p>
+              <p className="text-gray-400 text-xs">I dettagli appartengono solo a quella fattura</p>
+            </div>
+          </div>
+        </div>
+
         <div className="bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-400">
-          <p className="text-yellow-200"><strong>💡 Differenza chiave:</strong> Rombo <span className="text-yellow-400 font-bold">PIENO</span> in UML | Aggregazione = indipendenti | Composizione = dipendenti</p>
+          <p className="text-yellow-200"><strong>💡 Differenza chiave:</strong> Rombo <span className="text-yellow-400 font-bold">PIENO ◆</span> in UML | Aggregazione ◇ = indipendenti | Composizione ◆ = dipendenti</p>
         </div>
       </div>
     )
@@ -368,12 +415,129 @@ mario.IscriviACorso(db);     // Mario -> Database`}
           </div>
         </div>
 
+        <div className="bg-orange-900/20 p-5 rounded-xl border border-orange-500/30 mt-4">
+          <h4 className="text-lg font-bold mb-3 text-orange-300">Altri Esempi N-M nel Mondo Reale</h4>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-orange-300 font-bold">Attori ↔ Film</p>
+              <p className="text-gray-400 text-xs">Un attore recita in piu film, un film ha piu attori</p>
+            </div>
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-orange-300 font-bold">Prodotti ↔ Ordini</p>
+              <p className="text-gray-400 text-xs">Un prodotto puo essere in piu ordini</p>
+            </div>
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-orange-300 font-bold">Autori ↔ Libri</p>
+              <p className="text-gray-400 text-xs">Un autore scrive piu libri, un libro ha piu autori</p>
+            </div>
+            <div className="bg-gray-800/50 p-3 rounded">
+              <p className="text-orange-300 font-bold">Tag ↔ Articoli</p>
+              <p className="text-gray-400 text-xs">Un tag puo essere su piu articoli</p>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-400">
             <p className="text-blue-200"><strong>🔄 Bidirezionale:</strong> Navigabile in entrambe le direzioni</p>
           </div>
           <div className="bg-cyan-900/20 p-4 rounded-lg border-l-4 border-cyan-400">
             <p className="text-cyan-200"><strong>📊 Molti-a-Molti:</strong> List&lt;T&gt; su entrambi i lati</p>
+          </div>
+        </div>
+      </div>
+    )
+  },
+
+  // Slide 40 - Classe di Associazione
+  {
+    title: "Classe di Associazione",
+    subtitle: "Quando la relazione ha attributi propri",
+    content: (
+      <div className="space-y-6">
+        <div className="bg-blue-900/20 p-6 rounded-xl border-l-4 border-blue-400">
+          <h3 className="text-2xl font-bold mb-4 text-blue-300">Quando serve una Classe di Associazione?</h3>
+          <p className="text-lg text-gray-300">Quando la <span className="text-blue-400 font-semibold">relazione stessa</span> ha degli attributi. Esempio: l'iscrizione di uno studente a un corso ha una <span className="text-cyan-400 font-semibold">data</span> e un <span className="text-cyan-400 font-semibold">voto</span>.</p>
+        </div>
+
+        <div className="flex justify-center mb-4">
+          <svg width="650" height="200" className="bg-gray-800/30 rounded-xl p-4" viewBox="0 0 650 180">
+            {/* Studente */}
+            <rect x="50" y="60" width="120" height="60" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
+            <text x="110" y="95" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Studente</text>
+
+            {/* Corso */}
+            <rect x="480" y="60" width="120" height="60" fill="#0c4a6e" stroke="#06b6d4" strokeWidth="2" rx="4"/>
+            <text x="540" y="95" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Corso</text>
+
+            {/* Linea */}
+            <line x1="170" y1="90" x2="480" y2="90" stroke="#22d3ee" strokeWidth="2"/>
+            <text x="170" y="80" fill="#93c5fd" fontSize="12">*</text>
+            <text x="470" y="80" fill="#93c5fd" fontSize="12">*</text>
+
+            {/* Classe di associazione */}
+            <rect x="250" y="120" width="150" height="55" fill="#4c1d95" stroke="#a855f7" strokeWidth="2" rx="4"/>
+            <text x="325" y="140" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Iscrizione</text>
+            <text x="325" y="158" textAnchor="middle" fill="#d8b4fe" fontSize="11">- dataIscrizione</text>
+            <text x="325" y="172" textAnchor="middle" fill="#d8b4fe" fontSize="11">- votoFinale</text>
+
+            {/* Linea tratteggiata alla classe di associazione */}
+            <line x1="325" y1="90" x2="325" y2="120" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,3"/>
+          </svg>
+        </div>
+
+        <div className="bg-gray-900 p-6 rounded-xl border border-purple-500/30">
+          <h4 className="text-xl font-bold mb-4 text-purple-300">Implementazione: Iscrizione come Classe</h4>
+          <div className="font-mono text-xs">
+            <pre className="text-gray-300">
+{`// La CLASSE DI ASSOCIAZIONE contiene gli attributi della relazione
+public class Iscrizione
+{
+    public Studente Studente { get; private set; }
+    public Corso Corso { get; private set; }
+    public DateTime DataIscrizione { get; set; }
+    public int? VotoFinale { get; set; }  // null se non ancora valutato
+
+    public Iscrizione(Studente studente, Corso corso)
+    {
+        Studente = studente;
+        Corso = corso;
+        DataIscrizione = DateTime.Now;
+        VotoFinale = null;
+    }
+
+    public void AssegnaVoto(int voto)
+    {
+        if (voto >= 18 && voto <= 30)
+            VotoFinale = voto;
+    }
+
+    public override string ToString()
+    {
+        string esito = VotoFinale.HasValue ? $"Voto: {VotoFinale}" : "In corso";
+        return $"{Studente.Nome} - {Corso.Nome} ({DataIscrizione:dd/MM/yyyy}) - {esito}";
+    }
+}
+
+// Utilizzo
+Studente mario = new Studente("Mario Rossi");
+Corso oop = new Corso("Programmazione OOP");
+
+Iscrizione iscrizione = new Iscrizione(mario, oop);
+Console.WriteLine(iscrizione);  // Mario Rossi - OOP (15/01/2025) - In corso
+
+iscrizione.AssegnaVoto(28);
+Console.WriteLine(iscrizione);  // Mario Rossi - OOP (15/01/2025) - Voto: 28`}
+            </pre>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-purple-900/20 p-4 rounded-lg border-l-4 border-purple-400">
+            <p className="text-purple-200"><strong>📅 Quando usarla:</strong> Quando la relazione ha attributi propri (date, quantita, voti, ecc.)</p>
+          </div>
+          <div className="bg-cyan-900/20 p-4 rounded-lg border-l-4 border-cyan-400">
+            <p className="text-cyan-200"><strong>🔗 Esempi:</strong> Ordine-Prodotto (quantita), Dipendente-Progetto (ore lavorate)</p>
           </div>
         </div>
       </div>

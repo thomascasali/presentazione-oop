@@ -212,7 +212,7 @@ const Dashboard = ({ onNavigateToModule }) => {
       number: 5,
       title: "Associazioni",
       subtitle: "Relazioni tra oggetti + Riepilogo",
-      slides: 4,
+      slides: 5,
       icon: Link2,
       color: "indigo",
       moduleKey: "associazioni"
