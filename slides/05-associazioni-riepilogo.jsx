@@ -542,6 +542,219 @@ Console.WriteLine(iscrizione);  // Mario Rossi - OOP (15/01/2025) - Voto: 28`}
         </div>
       </div>
     )
+  },
+
+  // Slide 41 - Esempio Completo: Sistema Bancario
+  {
+    title: "Esempio Completo: Sistema Bancario",
+    subtitle: "Banca → Conti Correnti → Movimenti",
+    content: (
+      <div className="space-y-5">
+        <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 p-5 rounded-xl border-l-4 border-green-400">
+          <h3 className="text-xl font-bold mb-3 text-green-300">Scenario Reale</h3>
+          <p className="text-gray-300">Una <span className="text-green-400 font-bold">Banca</span> gestisce una lista di <span className="text-cyan-400 font-bold">Conti Correnti</span>. Ogni conto contiene una lista di <span className="text-yellow-400 font-bold">Movimenti</span> (versamenti, prelievi, bonifici).</p>
+        </div>
+
+        <div className="flex justify-center">
+          <svg width="700" height="160" className="bg-gray-800/30 rounded-xl p-3" viewBox="0 0 700 140">
+            {/* Banca */}
+            <rect x="30" y="40" width="120" height="60" fill="#065f46" stroke="#34d399" strokeWidth="2" rx="4"/>
+            <text x="90" y="65" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Banca</text>
+            <text x="90" y="82" textAnchor="middle" fill="#86efac" fontSize="10">- nome</text>
+            <text x="90" y="94" textAnchor="middle" fill="#86efac" fontSize="10">- conti: List</text>
+
+            {/* Freccia Banca -> Conto (Composizione) */}
+            <line x1="150" y1="70" x2="250" y2="70" stroke="#22d3ee" strokeWidth="2"/>
+            <path d="M 150,70 L 160,65 L 170,70 L 160,75 Z" fill="#22d3ee" stroke="#22d3ee" strokeWidth="2"/>
+            <text x="200" y="60" textAnchor="middle" fill="#93c5fd" fontSize="10">1</text>
+            <text x="240" y="60" textAnchor="middle" fill="#93c5fd" fontSize="10">*</text>
+
+            {/* ContoCorrente */}
+            <rect x="250" y="25" width="150" height="90" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="2" rx="4"/>
+            <text x="325" y="48" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">ContoCorrente</text>
+            <text x="325" y="65" textAnchor="middle" fill="#93c5fd" fontSize="9">- iban: string</text>
+            <text x="325" y="78" textAnchor="middle" fill="#93c5fd" fontSize="9">- saldo: decimal</text>
+            <text x="325" y="91" textAnchor="middle" fill="#93c5fd" fontSize="9">- titolare: string</text>
+            <text x="325" y="104" textAnchor="middle" fill="#93c5fd" fontSize="9">- movimenti: List</text>
+
+            {/* Freccia Conto -> Movimento (Composizione) */}
+            <line x1="400" y1="70" x2="500" y2="70" stroke="#22d3ee" strokeWidth="2"/>
+            <path d="M 400,70 L 410,65 L 420,70 L 410,75 Z" fill="#22d3ee" stroke="#22d3ee" strokeWidth="2"/>
+            <text x="450" y="60" textAnchor="middle" fill="#93c5fd" fontSize="10">1</text>
+            <text x="490" y="60" textAnchor="middle" fill="#93c5fd" fontSize="10">*</text>
+
+            {/* Movimento */}
+            <rect x="500" y="25" width="150" height="90" fill="#4c1d95" stroke="#a855f7" strokeWidth="2" rx="4"/>
+            <text x="575" y="48" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Movimento</text>
+            <text x="575" y="65" textAnchor="middle" fill="#d8b4fe" fontSize="9">- data: DateTime</text>
+            <text x="575" y="78" textAnchor="middle" fill="#d8b4fe" fontSize="9">- importo: decimal</text>
+            <text x="575" y="91" textAnchor="middle" fill="#d8b4fe" fontSize="9">- tipo: TipoMovimento</text>
+            <text x="575" y="104" textAnchor="middle" fill="#d8b4fe" fontSize="9">- descrizione: string</text>
+
+            {/* Legenda */}
+            <text x="200" y="130" textAnchor="middle" fill="#34d399" fontSize="9">◆ Composizione</text>
+            <text x="450" y="130" textAnchor="middle" fill="#34d399" fontSize="9">◆ Composizione</text>
+          </svg>
+        </div>
+
+        <div className="bg-gray-900 p-4 rounded-xl border border-cyan-500/30">
+          <h4 className="text-lg font-bold mb-3 text-cyan-300">Implementazione Completa in C#</h4>
+          <div className="font-mono text-xs max-h-80 overflow-y-auto">
+            <pre className="text-gray-300">
+{`// ENUM per i tipi di movimento
+public enum TipoMovimento { Versamento, Prelievo, Bonifico, Addebito }
+
+// CLASSE MOVIMENTO (parte del ContoCorrente)
+public class Movimento
+{
+    public DateTime Data { get; private set; }
+    public decimal Importo { get; private set; }
+    public TipoMovimento Tipo { get; private set; }
+    public string Descrizione { get; set; }
+
+    public Movimento(decimal importo, TipoMovimento tipo, string descrizione = "")
+    {
+        Data = DateTime.Now;
+        Importo = importo;
+        Tipo = tipo;
+        Descrizione = descrizione;
+    }
+
+    public override string ToString()
+    {
+        string segno = (Tipo == TipoMovimento.Versamento || Tipo == TipoMovimento.Bonifico) ? "+" : "-";
+        return $"{Data:dd/MM/yyyy} | {Tipo,-10} | {segno}{Importo,10:C} | {Descrizione}";
+    }
+}
+
+// CLASSE CONTO CORRENTE (parte della Banca, contiene Movimenti)
+public class ContoCorrente
+{
+    public string IBAN { get; private set; }
+    public string Titolare { get; set; }
+    public decimal Saldo { get; private set; }
+    private List<Movimento> movimenti;  // COMPOSIZIONE: i movimenti appartengono al conto
+
+    public ContoCorrente(string iban, string titolare, decimal saldoIniziale = 0)
+    {
+        IBAN = iban;
+        Titolare = titolare;
+        Saldo = saldoIniziale;
+        movimenti = new List<Movimento>();
+
+        if (saldoIniziale > 0)
+            movimenti.Add(new Movimento(saldoIniziale, TipoMovimento.Versamento, "Apertura conto"));
+    }
+
+    public bool Versa(decimal importo, string descrizione = "Versamento")
+    {
+        if (importo <= 0) return false;
+        Saldo += importo;
+        movimenti.Add(new Movimento(importo, TipoMovimento.Versamento, descrizione));
+        return true;
+    }
+
+    public bool Preleva(decimal importo, string descrizione = "Prelievo")
+    {
+        if (importo <= 0 || importo > Saldo) return false;
+        Saldo -= importo;
+        movimenti.Add(new Movimento(importo, TipoMovimento.Prelievo, descrizione));
+        return true;
+    }
+
+    public void StampaEstrattoConto()
+    {
+        Console.WriteLine($"\\n{'=',-60}");
+        Console.WriteLine($"ESTRATTO CONTO - {Titolare}");
+        Console.WriteLine($"IBAN: {IBAN}");
+        Console.WriteLine($"{'=',-60}");
+        foreach (var m in movimenti)
+            Console.WriteLine(m);
+        Console.WriteLine($"{'=',-60}");
+        Console.WriteLine($"SALDO ATTUALE: {Saldo:C}");
+    }
+}
+
+// CLASSE BANCA (contiene i Conti Correnti)
+public class Banca
+{
+    public string Nome { get; private set; }
+    private List<ContoCorrente> conti;  // COMPOSIZIONE: i conti appartengono alla banca
+
+    public Banca(string nome)
+    {
+        Nome = nome;
+        conti = new List<ContoCorrente>();
+    }
+
+    public ContoCorrente ApriConto(string titolare, decimal deposito = 0)
+    {
+        string iban = $"IT{new Random().Next(10000, 99999)}";
+        var conto = new ContoCorrente(iban, titolare, deposito);
+        conti.Add(conto);
+        return conto;
+    }
+
+    public ContoCorrente TrovaConto(string iban)
+    {
+        return conti.FirstOrDefault(c => c.IBAN == iban);
+    }
+
+    public void StampaReport()
+    {
+        Console.WriteLine($"\\n*** BANCA: {Nome} - {conti.Count} conti attivi ***");
+        decimal totale = conti.Sum(c => c.Saldo);
+        Console.WriteLine($"Totale depositi: {totale:C}");
+    }
+}
+
+// ========== UTILIZZO ==========
+Banca banca = new Banca("Banca Esempio");
+
+// Apertura conti
+ContoCorrente conto1 = banca.ApriConto("Mario Rossi", 1000);
+ContoCorrente conto2 = banca.ApriConto("Laura Bianchi", 500);
+
+// Operazioni su conto1
+conto1.Versa(250, "Stipendio");
+conto1.Preleva(100, "Bancomat");
+conto1.Preleva(50, "Bolletta luce");
+
+// Stampa estratto conto
+conto1.StampaEstrattoConto();
+// Output:
+// ============================================================
+// ESTRATTO CONTO - Mario Rossi
+// IBAN: IT12345
+// ============================================================
+// 15/01/2025 | Versamento |    +€1.000,00 | Apertura conto
+// 15/01/2025 | Versamento |      +€250,00 | Stipendio
+// 15/01/2025 | Prelievo   |      -€100,00 | Bancomat
+// 15/01/2025 | Prelievo   |       -€50,00 | Bolletta luce
+// ============================================================
+// SALDO ATTUALE: €1.100,00
+
+banca.StampaReport();  // BANCA: Banca Esempio - 2 conti attivi`}
+            </pre>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3 text-sm">
+          <div className="bg-green-900/20 p-3 rounded-lg border-l-4 border-green-400">
+            <p className="text-green-300 font-bold">Banca ◆ Conti</p>
+            <p className="text-gray-400 text-xs">Se chiude la banca, i conti non esistono piu</p>
+          </div>
+          <div className="bg-cyan-900/20 p-3 rounded-lg border-l-4 border-cyan-400">
+            <p className="text-cyan-300 font-bold">Conto ◆ Movimenti</p>
+            <p className="text-gray-400 text-xs">Se chiudi il conto, i movimenti spariscono</p>
+          </div>
+          <div className="bg-yellow-900/20 p-3 rounded-lg border-l-4 border-yellow-400">
+            <p className="text-yellow-300 font-bold">Incapsulamento</p>
+            <p className="text-gray-400 text-xs">Saldo modificabile solo tramite Versa/Preleva</p>
+          </div>
+        </div>
+      </div>
+    )
   }
 ];
 
