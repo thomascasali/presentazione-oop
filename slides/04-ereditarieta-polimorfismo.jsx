@@ -1295,118 +1295,146 @@ public class MiaClasse : IInterfaccia1, IInterfaccia2
 
           <div className="bg-gray-900 p-6 rounded-xl border-2 border-cyan-500/50 shadow-lg">
             <h4 className="text-xl font-bold mb-4 text-cyan-300 flex items-center gap-2">
-              <span className="text-2xl">🚗</span> Esempio: Veicoli Guidabili
+              <span className="text-2xl">🚗</span> Interfaccia vs Classe Base
             </h4>
             <div className="font-mono text-xs">
               <pre className="text-gray-300">
-{`// Interfaccia: definisce LE AZIONI che un veicolo DEVE fare
-public interface IVeicolo
+{`// INTERFACCIA → "SA FARE" (definisce un comportamento)
+public interface IAccendibile
 {
     void Accendi();
     void Spegni();
-    void Accelera(int kmh);
-    void Frena();
     bool IsAcceso { get; }
 }
 
-// Implementazione 1: Automobile
-public class Automobile : IVeicolo
+// CLASSE BASE → "È UN" (logica comune, no duplicazione)
+public class Veicolo
+{
+    protected int velocita;
+    public string Modello { get; set; }
+
+    public Veicolo(string modello) { Modello = modello; }
+
+    public virtual void Accelera(int kmh)
+    {
+        velocita += kmh;
+        Console.WriteLine($"{Modello}: velocità {velocita} km/h");
+    }
+
+    public virtual void Frena()
+    {
+        velocita = Math.Max(0, velocita - 20);
+        Console.WriteLine($"{Modello}: velocità {velocita} km/h");
+    }
+}
+
+// AUTOMOBILE: eredita Veicolo + implementa IAccendibile
+public class Automobile : Veicolo, IAccendibile
 {
     public bool IsAcceso { get; private set; }
-    private int velocita;
+
+    public Automobile(string modello) : base(modello) { }
 
     public void Accendi()
     {
         IsAcceso = true;
-        Console.WriteLine("Auto: giro la chiave, motore acceso!");
+        Console.WriteLine($"{Modello}: motore acceso");
     }
 
     public void Spegni()
     {
         IsAcceso = false;
         velocita = 0;
-        Console.WriteLine("Auto: motore spento");
+        Console.WriteLine($"{Modello}: motore spento");
     }
 
-    public void Accelera(int kmh)
+    public override void Accelera(int kmh)
     {
-        if (IsAcceso)
-        {
-            velocita += kmh;
-            Console.WriteLine($"Auto accelera a {velocita} km/h");
-        }
-    }
-
-    public void Frena()
-    {
-        velocita = Math.Max(0, velocita - 20);
-        Console.WriteLine($"Auto frena: {velocita} km/h");
+        if (IsAcceso) base.Accelera(kmh);
+        else Console.WriteLine("Auto spenta!");
     }
 }
 
-// Implementazione 2: Moto
-public class Moto : IVeicolo
+// MOTO: stessa struttura
+public class Moto : Veicolo, IAccendibile
 {
     public bool IsAcceso { get; private set; }
+
+    public Moto(string modello) : base(modello) { }
 
     public void Accendi()
     {
         IsAcceso = true;
-        Console.WriteLine("Moto: BRUM BRUM!");
+        Console.WriteLine($"{Modello}: BRUM BRUM!");
     }
 
     public void Spegni()
     {
         IsAcceso = false;
-        Console.WriteLine("Moto: motore spento");
+        velocita = 0;
     }
 
-    public void Accelera(int kmh)
+    public override void Accelera(int kmh)
     {
         if (IsAcceso)
-            Console.WriteLine($"Moto: VROOM! +{kmh} km/h");
+        {
+            velocita += kmh * 2;  // Più scattante!
+            Console.WriteLine($"{Modello}: VROOM {velocita} km/h");
+        }
     }
-
-    public void Frena()
-    {
-        Console.WriteLine("Moto: freno a disco attivato");
-    }
-}
-
-// POLIMORFISMO: stesse azioni, comportamenti diversi!
-void TestDrive(IVeicolo veicolo)
-{
-    veicolo.Accendi();
-    veicolo.Accelera(50);
-    veicolo.Frena();
-    veicolo.Spegni();
-}
-
-// Funziona con QUALSIASI IVeicolo!
-TestDrive(new Automobile());
-TestDrive(new Moto());`}
+}`}
               </pre>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="bg-gray-900 p-5 rounded-xl border border-cyan-500/30 mt-4">
+          <h4 className="text-lg font-bold mb-3 text-cyan-300">Due tipi di Polimorfismo</h4>
+          <div className="grid grid-cols-2 gap-4 font-mono text-xs">
+            <div className="bg-blue-900/30 p-3 rounded-lg">
+              <p className="text-blue-300 font-bold mb-2">Su Classe Base (eredità)</p>
+              <pre className="text-gray-300">{`void Gara(Veicolo v)
+{
+    v.Accelera(30);
+    v.Frena();
+}
+// Funziona: entrambi SONO Veicolo`}</pre>
+            </div>
+            <div className="bg-green-900/30 p-3 rounded-lg">
+              <p className="text-green-300 font-bold mb-2">Su Interfaccia (contratto)</p>
+              <pre className="text-gray-300">{`void Avvia(IAccendibile mezzo)
+{
+    mezzo.Accendi();
+}
+// Funziona: entrambi SANNO accendersi`}</pre>
+            </div>
+          </div>
+          <div className="mt-3 bg-gray-800 p-3 rounded-lg font-mono text-xs">
+            <pre className="text-gray-300">{`Automobile auto = new Automobile("Fiat 500");
+Moto moto = new Moto("Yamaha R1");
+
+Avvia(auto);  Avvia(moto);   // Polimorfismo su interfaccia
+Gara(auto);   Gara(moto);    // Polimorfismo su classe base`}</pre>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 mt-4">
           <div className="bg-purple-900/20 p-5 rounded-lg border-l-4 border-purple-400">
-            <h4 className="font-bold text-purple-300 mb-2 text-lg">Classe Astratta</h4>
+            <h4 className="font-bold text-purple-300 mb-2 text-lg">Classe Base → "È UN"</h4>
             <ul className="text-sm text-gray-300 space-y-1">
-              <li>• Puo avere implementazione</li>
+              <li>• Condivide logica comune</li>
               <li>• Ereditarieta singola</li>
-              <li>• Puo avere costruttori</li>
-              <li>• Puo avere campi</li>
+              <li>• Ha costruttori e campi</li>
+              <li>• Evita duplicazione codice</li>
             </ul>
           </div>
           <div className="bg-cyan-900/20 p-5 rounded-lg border-l-4 border-cyan-400">
-            <h4 className="font-bold text-cyan-300 mb-2 text-lg">Interfaccia</h4>
+            <h4 className="font-bold text-cyan-300 mb-2 text-lg">Interfaccia → "SA FARE"</h4>
             <ul className="text-sm text-gray-300 space-y-1">
-              <li>• Solo firme (nessuna implementazione*)</li>
+              <li>• Definisce comportamenti</li>
               <li>• Implementazione multipla</li>
-              <li>• Niente costruttori</li>
-              <li>• Niente campi (solo proprieta)</li>
+              <li>• Solo firme di metodi</li>
+              <li>• Contratto da rispettare</li>
             </ul>
           </div>
         </div>
