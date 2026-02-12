@@ -1295,69 +1295,96 @@ public class MiaClasse : IInterfaccia1, IInterfaccia2
 
           <div className="bg-gray-900 p-6 rounded-xl border-2 border-cyan-500/50 shadow-lg">
             <h4 className="text-xl font-bold mb-4 text-cyan-300 flex items-center gap-2">
-              <span className="text-2xl">🔌</span> Esempio: Sistema di Pagamenti
+              <span className="text-2xl">🚗</span> Esempio: Veicoli Guidabili
             </h4>
             <div className="font-mono text-xs">
               <pre className="text-gray-300">
-{`// Interfaccia: definisce IL CONTRATTO
-public interface IMetodoPagamento
+{`// Interfaccia: definisce LE AZIONI che un veicolo DEVE fare
+public interface IVeicolo
 {
-    bool Paga(double importo);
-    string GetNome();
-    bool VerificaFondi(double importo);
+    void Accendi();
+    void Spegni();
+    void Accelera(int kmh);
+    void Frena();
+    bool IsAcceso { get; }
 }
 
-// Implementazione 1: Carta di Credito
-public class CartaCredito : IMetodoPagamento
+// Implementazione 1: Automobile
+public class Automobile : IVeicolo
 {
-    private double limite;
+    public bool IsAcceso { get; private set; }
+    private int velocita;
 
-    public bool Paga(double importo)
+    public void Accendi()
     {
-        if (VerificaFondi(importo))
-        {
-            limite -= importo;
-            return true;
-        }
-        return false;
+        IsAcceso = true;
+        Console.WriteLine("Auto: giro la chiave, motore acceso!");
     }
 
-    public string GetNome() => "Carta di Credito";
-    public bool VerificaFondi(double i) => limite >= i;
-}
-
-// Implementazione 2: PayPal
-public class PayPal : IMetodoPagamento
-{
-    private double saldo;
-
-    public bool Paga(double importo)
+    public void Spegni()
     {
-        if (VerificaFondi(importo))
-        {
-            saldo -= importo;
-            return true;
-        }
-        return false;
+        IsAcceso = false;
+        velocita = 0;
+        Console.WriteLine("Auto: motore spento");
     }
 
-    public string GetNome() => "PayPal";
-    public bool VerificaFondi(double i) => saldo >= i;
+    public void Accelera(int kmh)
+    {
+        if (IsAcceso)
+        {
+            velocita += kmh;
+            Console.WriteLine($"Auto accelera a {velocita} km/h");
+        }
+    }
+
+    public void Frena()
+    {
+        velocita = Math.Max(0, velocita - 20);
+        Console.WriteLine($"Auto frena: {velocita} km/h");
+    }
 }
 
-// POLIMORFISMO con interfacce!
-void ProcessaOrdine(IMetodoPagamento metodo, double totale)
+// Implementazione 2: Moto
+public class Moto : IVeicolo
 {
-    Console.WriteLine($"Pagamento con: {metodo.GetNome()}");
-    if (metodo.Paga(totale))
-        Console.WriteLine("Pagamento riuscito!");
-    else
-        Console.WriteLine("Pagamento fallito!");
+    public bool IsAcceso { get; private set; }
+
+    public void Accendi()
+    {
+        IsAcceso = true;
+        Console.WriteLine("Moto: BRUM BRUM!");
+    }
+
+    public void Spegni()
+    {
+        IsAcceso = false;
+        Console.WriteLine("Moto: motore spento");
+    }
+
+    public void Accelera(int kmh)
+    {
+        if (IsAcceso)
+            Console.WriteLine($"Moto: VROOM! +{kmh} km/h");
+    }
+
+    public void Frena()
+    {
+        Console.WriteLine("Moto: freno a disco attivato");
+    }
 }
 
-// Funziona con QUALSIASI IMetodoPagamento!
-ProcessaOrdine(new CartaCredito(), 100);
-ProcessaOrdine(new PayPal(), 50);`}
+// POLIMORFISMO: stesse azioni, comportamenti diversi!
+void TestDrive(IVeicolo veicolo)
+{
+    veicolo.Accendi();
+    veicolo.Accelera(50);
+    veicolo.Frena();
+    veicolo.Spegni();
+}
+
+// Funziona con QUALSIASI IVeicolo!
+TestDrive(new Automobile());
+TestDrive(new Moto());`}
               </pre>
             </div>
           </div>
