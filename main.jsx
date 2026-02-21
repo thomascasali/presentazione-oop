@@ -93,6 +93,7 @@ const OOPPresentation = () => {
   const metodiQuizSlide = window.metodiQuizSlide || null;
 
   const ereditarietaPolimorfismoSlides = window.ereditarietaPolimorfismoSlides || [];
+  const ereditarietaQuizSlides = window.ereditarietaQuizSlides || [];
   const ereditarietaQuizSlide = window.ereditarietaQuizSlide || null;
 
   const associazioniRiepilogoSlides = window.associazioniRiepilogoSlides || [];
@@ -108,7 +109,7 @@ const OOPPresentation = () => {
     ...metodiIncapsulamentoSlides,
     ...(metodiQuizSlide ? [metodiQuizSlide] : []),
     ...ereditarietaPolimorfismoSlides,
-    ...(ereditarietaQuizSlide ? [ereditarietaQuizSlide] : []),
+    ...(ereditarietaQuizSlides.length > 0 ? ereditarietaQuizSlides : (ereditarietaQuizSlide ? [ereditarietaQuizSlide] : [])),
     ...associazioniRiepilogoSlides,
     ...(associazioniQuizSlide ? [associazioniQuizSlide] : []),
   ];
@@ -208,7 +209,16 @@ const OOPPresentation = () => {
     slideIndex += ereditarietaPolimorfismoSlides.length;
   }
 
-  if (ereditarietaQuizSlide) {
+  if (ereditarietaQuizSlides.length > 0) {
+    sections.push({
+      title: 'Quiz - Ereditarieta',
+      startSlide: slideIndex,
+      slideCount: ereditarietaQuizSlides.length,
+      type: 'quiz',
+      moduleNumber: 4
+    });
+    slideIndex += ereditarietaQuizSlides.length;
+  } else if (ereditarietaQuizSlide) {
     sections.push({
       title: 'Quiz - Ereditarieta',
       startSlide: slideIndex,
@@ -666,7 +676,7 @@ const OOPPresentation = () => {
                           ? 1 + fondamentiSlides.length + (fondamentiQuizSlide ? 1 : 0) +
                             costruttoriPropertiesSlides.length + (costruttoriQuizSlide ? 1 : 0) +
                             metodiIncapsulamentoSlides.length + (metodiQuizSlide ? 1 : 0) +
-                            ereditarietaPolimorfismoSlides.length + (ereditarietaQuizSlide ? 1 : 0)
+                            ereditarietaPolimorfismoSlides.length + (ereditarietaQuizSlides.length || (ereditarietaQuizSlide ? 1 : 0))
                           : null
                       };
                       const slideIndex = moduleMap[moduleKey];
