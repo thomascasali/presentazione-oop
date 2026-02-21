@@ -688,12 +688,7 @@ const OOPPresentation = () => {
                 : currentSlideData.content
             : currentSlideData.isQuiz || currentSlideData.type === 'quiz'
             ? typeof currentSlideData.content === 'function'
-                ? (() => {
-                    const result = currentSlideData.content();
-                    return typeof result === 'function'
-                      ? React.createElement(result)
-                      : result;
-                  })()
+                ? currentSlideData.content(currentSlideData.slideId || `slide-${currentSlide}`)
                 : currentSlideData.content
             : React.createElement(
                 'div',

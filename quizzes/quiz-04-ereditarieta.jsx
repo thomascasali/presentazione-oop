@@ -3,15 +3,22 @@
 // ========================================
 // Ristrutturato: componenti interattivi con feedback immediato
 // Suddiviso in slide multiple per migliore fruibilità
+// IMPORTANTE: content è una funzione per resettare lo stato tra le slide
 
-const { useState } = React;
+const { useState, useEffect } = React;
 
 // ========================================
 // COMPONENTE: Domanda a Scelta Multipla
 // ========================================
-const QuizDomanda = ({ numero, domanda, opzioni, corretta, spiegazione, colore = "blue" }) => {
+const QuizDomanda = ({ numero, domanda, opzioni, corretta, spiegazione, colore = "blue", resetKey }) => {
   const [selezionata, setSelezionata] = useState(null);
   const [verificata, setVerificata] = useState(false);
+
+  // Reset quando cambia la slide (resetKey cambia)
+  useEffect(() => {
+    setSelezionata(null);
+    setVerificata(false);
+  }, [resetKey]);
 
   const colori = {
     blue: { border: "border-blue-400", text: "text-blue-300", bg: "bg-blue-900/20" },
@@ -98,7 +105,7 @@ const QuizDomanda = ({ numero, domanda, opzioni, corretta, spiegazione, colore =
 // ========================================
 // COMPONENTE: Tracker Punteggio per sezione
 // ========================================
-const QuizTracker = ({ titolo, domande, children }) => {
+const QuizTracker = ({ titolo, children }) => {
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 p-5 rounded-xl border-2 border-purple-400/50">
@@ -115,8 +122,13 @@ const QuizTracker = ({ titolo, domande, children }) => {
 // ========================================
 // COMPONENTE: Esercizio Completamento Codice
 // ========================================
-const EsercizioCodice = ({ numero, titolo, descrizione, codice, soluzioni, spiegazioneFinale, colore = "cyan" }) => {
+const EsercizioCodice = ({ numero, titolo, descrizione, codice, soluzioni, spiegazioneFinale, colore = "cyan", resetKey }) => {
   const [mostraSoluzione, setMostraSoluzione] = useState(false);
+
+  useEffect(() => {
+    setMostraSoluzione(false);
+  }, [resetKey]);
+
   const colori = {
     cyan: "border-cyan-500/50",
     purple: "border-purple-500/50",
@@ -158,8 +170,13 @@ const EsercizioCodice = ({ numero, titolo, descrizione, codice, soluzioni, spieg
 // ========================================
 // COMPONENTE: Flashcard interattiva
 // ========================================
-const Flashcard = ({ termine, definizione, esempio, colore = "blue" }) => {
+const Flashcard = ({ termine, definizione, esempio, colore = "blue", resetKey }) => {
   const [aperta, setAperta] = useState(false);
+
+  useEffect(() => {
+    setAperta(false);
+  }, [resetKey]);
+
   const colori = {
     blue: "border-blue-400/50 hover:border-blue-400",
     cyan: "border-cyan-400/50 hover:border-cyan-400",
@@ -197,127 +214,138 @@ const Flashcard = ({ termine, definizione, esempio, colore = "blue" }) => {
 // ========================================
 // SLIDE 1: Quiz Ereditarietà (4 domande)
 // ========================================
+const QuizSlide1Content = ({ slideKey }) => (
+  <QuizTracker titolo="Ereditarieta - Domande a scelta multipla">
+    <QuizDomanda
+      numero={1}
+      domanda="Quale keyword permette ad una classe di ereditare da un'altra in C#?"
+      opzioni={["extends", "implements", ": (due punti)", "inherits"]}
+      corretta={2}
+      spiegazione="In C# si usa la sintassi: public class Derivata : Base"
+      colore="blue"
+      resetKey={slideKey}
+    />
+    <QuizDomanda
+      numero={2}
+      domanda="Quante classi base puo ereditare una classe in C#?"
+      opzioni={["Nessuna", "Una sola", "Due", "Illimitate"]}
+      corretta={1}
+      spiegazione="C# non supporta ereditarieta multipla (ma supporta multiple interfacce)"
+      colore="cyan"
+      resetKey={slideKey}
+    />
+    <QuizDomanda
+      numero={3}
+      domanda="Quale keyword si usa per ridefinire un metodo virtual nella classe derivata?"
+      opzioni={["redefine", "override", "new", "virtual"]}
+      corretta={1}
+      spiegazione="La keyword 'override' indica che si sta ridefinendo un metodo virtual della classe base"
+      colore="purple"
+      resetKey={slideKey}
+    />
+    <QuizDomanda
+      numero={4}
+      domanda="Qual e il modificatore di accesso per membri accessibili nelle classi derivate?"
+      opzioni={["private", "public", "protected", "internal"]}
+      corretta={2}
+      spiegazione="'protected' permette accesso alla classe base e a tutte le classi derivate, ma non dall'esterno"
+      colore="blue"
+      resetKey={slideKey}
+    />
+  </QuizTracker>
+);
+
 const quizSlide1 = {
   isQuiz: true,
+  slideId: "quiz-m4-1",
   title: "Quiz: Ereditarieta",
   subtitle: "Verifica le tue conoscenze sull'ereditarieta",
-  content: (
-    <QuizTracker titolo="Ereditarieta - Domande a scelta multipla">
-      <QuizDomanda
-        numero={1}
-        domanda="Quale keyword permette ad una classe di ereditare da un'altra in C#?"
-        opzioni={["extends", "implements", ": (due punti)", "inherits"]}
-        corretta={2}
-        spiegazione="In C# si usa la sintassi: public class Derivata : Base"
-        colore="blue"
-      />
-      <QuizDomanda
-        numero={2}
-        domanda="Quante classi base puo ereditare una classe in C#?"
-        opzioni={["Nessuna", "Una sola", "Due", "Illimitate"]}
-        corretta={1}
-        spiegazione="C# non supporta ereditarieta multipla (ma supporta multiple interfacce)"
-        colore="cyan"
-      />
-      <QuizDomanda
-        numero={3}
-        domanda="Quale keyword si usa per ridefinire un metodo virtual nella classe derivata?"
-        opzioni={["redefine", "override", "new", "virtual"]}
-        corretta={1}
-        spiegazione="La keyword 'override' indica che si sta ridefinendo un metodo virtual della classe base"
-        colore="purple"
-      />
-      <QuizDomanda
-        numero={4}
-        domanda="Qual e il modificatore di accesso per membri accessibili nelle classi derivate?"
-        opzioni={["private", "public", "protected", "internal"]}
-        corretta={2}
-        spiegazione="'protected' permette accesso alla classe base e a tutte le classi derivate, ma non dall'esterno"
-        colore="blue"
-      />
-    </QuizTracker>
-  )
+  content: (slideKey) => <QuizSlide1Content slideKey={slideKey} />
 };
 
 
 // ========================================
 // SLIDE 2: Quiz Polimorfismo e Casting (4 domande)
 // ========================================
+const QuizSlide2Content = ({ slideKey }) => (
+  <QuizTracker titolo="Polimorfismo e Casting - Domande a scelta multipla">
+    <QuizDomanda
+      numero={5}
+      domanda="Cos'e il polimorfismo runtime?"
+      opzioni={[
+        "Method overloading (stesso nome, parametri diversi)",
+        "Method overriding (ridefinizione metodi virtual)",
+        "Casting tra tipi",
+        "Generics"
+      ]}
+      corretta={1}
+      spiegazione="Il polimorfismo runtime si ottiene tramite override di metodi virtual, risolto durante l'esecuzione"
+      colore="purple"
+      resetKey={slideKey}
+    />
+    <QuizDomanda
+      numero={6}
+      domanda="Quale operatore verifica il tipo di un oggetto senza sollevare eccezioni?"
+      opzioni={["typeof", "instanceof", "is", "cast"]}
+      corretta={2}
+      spiegazione="L'operatore 'is' verifica se un oggetto e di un certo tipo e ritorna bool"
+      colore="cyan"
+      resetKey={slideKey}
+    />
+    <QuizDomanda
+      numero={7}
+      domanda="Cosa restituisce l'operatore 'as' se il cast fallisce?"
+      opzioni={["Lancia un'eccezione", "Ritorna null", "Ritorna false", "Ritorna l'oggetto originale"]}
+      corretta={1}
+      spiegazione="L'operatore 'as' e sicuro: ritorna null se il cast non riesce, senza lanciare eccezioni"
+      colore="blue"
+      resetKey={slideKey}
+    />
+    <QuizDomanda
+      numero={8}
+      domanda="Qual e la differenza tra interfaccia e classe base?"
+      opzioni={[
+        "L'interfaccia definisce 'cosa fare' (sa fare), la classe base condivide logica comune (e un)",
+        "Non c'e differenza, sono la stessa cosa",
+        "L'interfaccia puo avere costruttori, la classe base no",
+        "La classe base supporta implementazione multipla, l'interfaccia no"
+      ]}
+      corretta={0}
+      spiegazione="Interfaccia = 'SA FARE' (contratto di comportamento). Classe base = 'E UN' (condivide codice). Una classe puo implementare molte interfacce ma ereditare da una sola classe base."
+      colore="pink"
+      resetKey={slideKey}
+    />
+  </QuizTracker>
+);
+
 const quizSlide2 = {
   isQuiz: true,
+  slideId: "quiz-m4-2",
   title: "Quiz: Polimorfismo e Casting",
   subtitle: "Verifica le tue conoscenze su polimorfismo e type casting",
-  content: (
-    <QuizTracker titolo="Polimorfismo e Casting - Domande a scelta multipla">
-      <QuizDomanda
-        numero={5}
-        domanda="Cos'e il polimorfismo runtime?"
-        opzioni={[
-          "Method overloading (stesso nome, parametri diversi)",
-          "Method overriding (ridefinizione metodi virtual)",
-          "Casting tra tipi",
-          "Generics"
-        ]}
-        corretta={1}
-        spiegazione="Il polimorfismo runtime si ottiene tramite override di metodi virtual, risolto durante l'esecuzione"
-        colore="purple"
-      />
-      <QuizDomanda
-        numero={6}
-        domanda="Quale operatore verifica il tipo di un oggetto senza sollevare eccezioni?"
-        opzioni={["typeof", "instanceof", "is", "cast"]}
-        corretta={2}
-        spiegazione="L'operatore 'is' verifica se un oggetto e di un certo tipo e ritorna bool"
-        colore="cyan"
-      />
-      <QuizDomanda
-        numero={7}
-        domanda="Cosa restituisce l'operatore 'as' se il cast fallisce?"
-        opzioni={["Lancia un'eccezione", "Ritorna null", "Ritorna false", "Ritorna l'oggetto originale"]}
-        corretta={1}
-        spiegazione="L'operatore 'as' e sicuro: ritorna null se il cast non riesce, senza lanciare eccezioni"
-        colore="blue"
-      />
-      <QuizDomanda
-        numero={8}
-        domanda="Qual e la differenza tra interfaccia e classe base?"
-        opzioni={[
-          "L'interfaccia definisce 'cosa fare' (sa fare), la classe base condivide logica comune (e un)",
-          "Non c'e differenza, sono la stessa cosa",
-          "L'interfaccia puo avere costruttori, la classe base no",
-          "La classe base supporta implementazione multipla, l'interfaccia no"
-        ]}
-        corretta={0}
-        spiegazione="Interfaccia = 'SA FARE' (contratto di comportamento). Classe base = 'E UN' (condivide codice). Una classe puo implementare molte interfacce ma ereditare da una sola classe base."
-        colore="pink"
-      />
-    </QuizTracker>
-  )
+  content: (slideKey) => <QuizSlide2Content slideKey={slideKey} />
 };
 
 
 // ========================================
 // SLIDE 3: Esercizi di Completamento Codice
 // ========================================
-const quizSlide3 = {
-  isQuiz: true,
-  title: "Esercizi: Completamento Codice",
-  subtitle: "Completa il codice mancante",
-  content: (
-    <div className="space-y-6">
-      <div className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 p-5 rounded-xl border-2 border-blue-400/50">
-        <h3 className="text-2xl font-bold text-blue-300 flex items-center gap-3">
-          <span className="text-3xl">💻</span> Esercizi di Completamento Codice
-        </h3>
-        <p className="text-gray-400 text-sm mt-1">Leggi il codice, individua le keyword mancanti, poi verifica la soluzione</p>
-      </div>
+const QuizSlide3Content = ({ slideKey }) => (
+  <div className="space-y-6">
+    <div className="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 p-5 rounded-xl border-2 border-blue-400/50">
+      <h3 className="text-2xl font-bold text-blue-300 flex items-center gap-3">
+        <span className="text-3xl">💻</span> Esercizi di Completamento Codice
+      </h3>
+      <p className="text-gray-400 text-sm mt-1">Leggi il codice, individua le keyword mancanti, poi verifica la soluzione</p>
+    </div>
 
-      <EsercizioCodice
-        numero={1}
-        titolo="Completa la classe derivata"
-        descrizione="Completa il codice della classe Gatto che eredita da Animale:"
-        colore="cyan"
-        codice={`public class Animale
+    <EsercizioCodice
+      numero={1}
+      titolo="Completa la classe derivata"
+      descrizione="Completa il codice della classe Gatto che eredita da Animale:"
+      colore="cyan"
+      resetKey={slideKey}
+      codice={`public class Animale
 {
     protected string nome;
     public Animale(string nome) { this.nome = nome; }
@@ -343,18 +371,19 @@ public class Gatto ___ Animale  // 1. Completa
         Console.WriteLine($"{nome} fa MIAO!");
     }
 }`}
-        soluzioni={`1. : (due punti) → public class Gatto : Animale
+      soluzioni={`1. : (due punti) → public class Gatto : Animale
 2. : base      → : base(nome)
 3. override    → public override void FaiVerso()`}
-        spiegazioneFinale="':' per ereditare, ': base(...)' per il costruttore della classe base, 'override' per ridefinire un metodo virtual."
-      />
+      spiegazioneFinale="':' per ereditare, ': base(...)' per il costruttore della classe base, 'override' per ridefinire un metodo virtual."
+    />
 
-      <EsercizioCodice
-        numero={2}
-        titolo="Implementa il polimorfismo"
-        descrizione="Completa il codice per il polimorfismo con le forme geometriche:"
-        colore="purple"
-        codice={`public class Forma
+    <EsercizioCodice
+      numero={2}
+      titolo="Implementa il polimorfismo"
+      descrizione="Completa il codice per il polimorfismo con le forme geometriche:"
+      colore="purple"
+      resetKey={slideKey}
+      codice={`public class Forma
 {
     public ___ double CalcolaArea()  // 1. Rendi ridefinibile
     {
@@ -378,18 +407,19 @@ public class Rettangolo : Forma
 // Utilizzo con polimorfismo
 ___ f1 = new Rettangolo(5, 10);  // 3. Che tipo usare?
 Console.WriteLine(f1.CalcolaArea());  // Output: 50`}
-        soluzioni={`1. virtual   → public virtual double CalcolaArea()
+      soluzioni={`1. virtual   → public virtual double CalcolaArea()
 2. override  → public override double CalcolaArea()
 3. Forma     → Forma f1 = new Rettangolo(5, 10)`}
-        spiegazioneFinale="'virtual' nella base, 'override' nella derivata. Per il polimorfismo si usa il tipo base (Forma) come tipo della variabile!"
-      />
+      spiegazioneFinale="'virtual' nella base, 'override' nella derivata. Per il polimorfismo si usa il tipo base (Forma) come tipo della variabile!"
+    />
 
-      <EsercizioCodice
-        numero={3}
-        titolo="Interfaccia + Ereditarieta"
-        descrizione="Completa usando l'interfaccia IAccendibile e la classe base Veicolo:"
-        colore="pink"
-        codice={`public ___ IAccendibile  // 1. Keyword per dichiarare interfaccia
+    <EsercizioCodice
+      numero={3}
+      titolo="Interfaccia + Ereditarieta"
+      descrizione="Completa usando l'interfaccia IAccendibile e la classe base Veicolo:"
+      colore="pink"
+      resetKey={slideKey}
+      codice={`public ___ IAccendibile  // 1. Keyword per dichiarare interfaccia
 {
     void Accendi();
     void Spegni();
@@ -416,85 +446,95 @@ public class Auto ___ Veicolo, IAccendibile  // 3. Completa
         ___.Accelera(kmh);  // 5. Chiama versione base
     }
 }`}
-        soluzioni={`1. interface  → public interface IAccendibile
+      soluzioni={`1. interface  → public interface IAccendibile
 2. virtual    → public virtual void Accelera(int kmh)
 3. :          → public class Auto : Veicolo, IAccendibile
 4. override   → public override void Accelera(int kmh)
 5. base       → base.Accelera(kmh)`}
-        spiegazioneFinale="'interface' per dichiarare, ':' per ereditare/implementare (classe base PRIMA, interfacce DOPO), 'virtual/override' per il polimorfismo, 'base' per chiamare il metodo della classe padre."
-      />
-    </div>
-  )
+      spiegazioneFinale="'interface' per dichiarare, ':' per ereditare/implementare (classe base PRIMA, interfacce DOPO), 'virtual/override' per il polimorfismo, 'base' per chiamare il metodo della classe padre."
+    />
+  </div>
+);
+
+const quizSlide3 = {
+  isQuiz: true,
+  slideId: "quiz-m4-3",
+  title: "Esercizi: Completamento Codice",
+  subtitle: "Completa il codice mancante",
+  content: (slideKey) => <QuizSlide3Content slideKey={slideKey} />
 };
 
 
 // ========================================
 // SLIDE 4: Flashcards + Sfida Pratica
 // ========================================
-const quizSlide4 = {
-  isQuiz: true,
-  title: "Flashcards e Sfida Pratica",
-  subtitle: "Ripasso termini chiave e sfida di progettazione",
-  content: (
-    <div className="space-y-6">
-      <div className="bg-gradient-to-r from-cyan-900/30 to-teal-900/30 p-5 rounded-xl border-2 border-cyan-400/50">
-        <h3 className="text-2xl font-bold text-cyan-300 flex items-center gap-3">
-          <span className="text-3xl">🎴</span> Flashcards - Clicca per rivelare
-        </h3>
-        <p className="text-gray-400 text-sm mt-1">Prova a ricordare la definizione prima di cliccare!</p>
-      </div>
+const QuizSlide4Content = ({ slideKey }) => (
+  <div className="space-y-6">
+    <div className="bg-gradient-to-r from-cyan-900/30 to-teal-900/30 p-5 rounded-xl border-2 border-cyan-400/50">
+      <h3 className="text-2xl font-bold text-cyan-300 flex items-center gap-3">
+        <span className="text-3xl">🎴</span> Flashcards - Clicca per rivelare
+      </h3>
+      <p className="text-gray-400 text-sm mt-1">Prova a ricordare la definizione prima di cliccare!</p>
+    </div>
 
-      <div className="grid grid-cols-3 gap-3">
-        <Flashcard termine="Classe Base" definizione="Classe da cui altre classi ereditano proprieta e metodi. Chiamata anche superclasse o parent class." esempio="class Animale { }" colore="blue" />
-        <Flashcard termine="Classe Derivata" definizione="Classe che eredita da una classe base. Chiamata anche sottoclasse o child class." esempio="class Cane : Animale { }" colore="cyan" />
-        <Flashcard termine="virtual" definizione="Keyword che indica che un metodo puo essere ridefinito nelle classi derivate." esempio="public virtual void Metodo()" colore="purple" />
-        <Flashcard termine="override" definizione="Keyword che ridefinisce un metodo virtual della classe base con una nuova implementazione." esempio="public override void Metodo()" colore="pink" />
-        <Flashcard termine="base" definizione="Keyword per accedere a membri della classe base da una classe derivata." esempio="base.Metodo() oppure : base(param)" colore="blue" />
-        <Flashcard termine="abstract" definizione="Classe o metodo incompleto che DEVE essere implementato nelle classi derivate. Non istanziabile." esempio="public abstract class Forma { }" colore="cyan" />
-        <Flashcard termine="interface" definizione="Contratto che definisce 'SA FARE': solo firme di metodi senza implementazione. Implementazione multipla." esempio="public interface IAccendibile { }" colore="green" />
-        <Flashcard termine="protected" definizione="Modificatore: membro accessibile nella classe stessa e in tutte le classi derivate, non dall'esterno." esempio="protected string nome;" colore="orange" />
-        <Flashcard termine="Upcasting" definizione="Conversione implicita da derivata a base. Sempre sicura, avviene automaticamente." esempio="Animale a = new Cane();" colore="green" />
-        <Flashcard termine="Downcasting" definizione="Conversione esplicita da base a derivata. Serve 'as' o 'is' per sicurezza." esempio="Cane c = a as Cane;" colore="orange" />
-        <Flashcard termine="Overloading" definizione="Polimorfismo compile-time: stesso nome metodo con parametri diversi. Risolto dal compilatore." esempio="Somma(int,int) vs Somma(double,double)" colore="blue" />
-        <Flashcard termine="Overriding" definizione="Polimorfismo runtime: ridefinizione metodi virtual con stessa firma. Risolto a tempo di esecuzione." esempio="public override void FaiVerso()" colore="purple" />
-      </div>
+    <div className="grid grid-cols-3 gap-3">
+      <Flashcard termine="Classe Base" definizione="Classe da cui altre classi ereditano proprieta e metodi. Chiamata anche superclasse o parent class." esempio="class Animale { }" colore="blue" resetKey={slideKey} />
+      <Flashcard termine="Classe Derivata" definizione="Classe che eredita da una classe base. Chiamata anche sottoclasse o child class." esempio="class Cane : Animale { }" colore="cyan" resetKey={slideKey} />
+      <Flashcard termine="virtual" definizione="Keyword che indica che un metodo puo essere ridefinito nelle classi derivate." esempio="public virtual void Metodo()" colore="purple" resetKey={slideKey} />
+      <Flashcard termine="override" definizione="Keyword che ridefinisce un metodo virtual della classe base con una nuova implementazione." esempio="public override void Metodo()" colore="pink" resetKey={slideKey} />
+      <Flashcard termine="base" definizione="Keyword per accedere a membri della classe base da una classe derivata." esempio="base.Metodo() oppure : base(param)" colore="blue" resetKey={slideKey} />
+      <Flashcard termine="abstract" definizione="Classe o metodo incompleto che DEVE essere implementato nelle classi derivate. Non istanziabile." esempio="public abstract class Forma { }" colore="cyan" resetKey={slideKey} />
+      <Flashcard termine="interface" definizione="Contratto che definisce 'SA FARE': solo firme di metodi senza implementazione. Implementazione multipla." esempio="public interface IAccendibile { }" colore="green" resetKey={slideKey} />
+      <Flashcard termine="protected" definizione="Modificatore: membro accessibile nella classe stessa e in tutte le classi derivate, non dall'esterno." esempio="protected string nome;" colore="orange" resetKey={slideKey} />
+      <Flashcard termine="Upcasting" definizione="Conversione implicita da derivata a base. Sempre sicura, avviene automaticamente." esempio="Animale a = new Cane();" colore="green" resetKey={slideKey} />
+      <Flashcard termine="Downcasting" definizione="Conversione esplicita da base a derivata. Serve 'as' o 'is' per sicurezza." esempio="Cane c = a as Cane;" colore="orange" resetKey={slideKey} />
+      <Flashcard termine="Overloading" definizione="Polimorfismo compile-time: stesso nome metodo con parametri diversi. Risolto dal compilatore." esempio="Somma(int,int) vs Somma(double,double)" colore="blue" resetKey={slideKey} />
+      <Flashcard termine="Overriding" definizione="Polimorfismo runtime: ridefinizione metodi virtual con stessa firma. Risolto a tempo di esecuzione." esempio="public override void FaiVerso()" colore="purple" resetKey={slideKey} />
+    </div>
 
-      {/* Sfida pratica */}
-      <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 p-6 rounded-xl border-2 border-yellow-400/50">
-        <h4 className="text-2xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
-          <span className="text-3xl">🏆</span> Sfida Pratica
-        </h4>
-        <p className="text-gray-300 mb-4">
-          Progetta un sistema di gestione per una biblioteca con le seguenti classi:
-        </p>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="bg-gray-900 p-4 rounded-lg border border-yellow-500/30">
-            <p className="text-yellow-300 font-bold mb-2">Classe Base</p>
-            <ul className="text-sm text-gray-300 space-y-1">
-              <li>• <strong>MediaItem</strong>: titolo, anno, disponibile</li>
-              <li>• Metodi virtual: StampaInfo(), CalcolaMulta(int giorni)</li>
-            </ul>
-          </div>
-          <div className="bg-gray-900 p-4 rounded-lg border border-orange-500/30">
-            <p className="text-orange-300 font-bold mb-2">Classi Derivate</p>
-            <ul className="text-sm text-gray-300 space-y-1">
-              <li>• <strong>Libro</strong>: autore, ISBN, numeroPagine</li>
-              <li>• <strong>DVD</strong>: regista, durata</li>
-              <li>• <strong>Rivista</strong>: numeroEdizione, mese</li>
-            </ul>
-          </div>
-        </div>
+    {/* Sfida pratica */}
+    <div className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 p-6 rounded-xl border-2 border-yellow-400/50">
+      <h4 className="text-2xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
+        <span className="text-3xl">🏆</span> Sfida Pratica
+      </h4>
+      <p className="text-gray-300 mb-4">
+        Progetta un sistema di gestione per una biblioteca con le seguenti classi:
+      </p>
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="bg-gray-900 p-4 rounded-lg border border-yellow-500/30">
-          <p className="text-yellow-200 font-bold mb-2">Obiettivo:</p>
-          <p className="text-gray-300 text-sm">
-            Implementa override di StampaInfo() e CalcolaMulta() per ogni tipo.
-            Usa il polimorfismo per gestire una <code>List&lt;MediaItem&gt;</code> con tutti i media!
-            La multa e diversa per tipo: Libro 0.50€/giorno, DVD 1.00€/giorno, Rivista 0.20€/giorno.
-          </p>
+          <p className="text-yellow-300 font-bold mb-2">Classe Base</p>
+          <ul className="text-sm text-gray-300 space-y-1">
+            <li>• <strong>MediaItem</strong>: titolo, anno, disponibile</li>
+            <li>• Metodi virtual: StampaInfo(), CalcolaMulta(int giorni)</li>
+          </ul>
         </div>
+        <div className="bg-gray-900 p-4 rounded-lg border border-orange-500/30">
+          <p className="text-orange-300 font-bold mb-2">Classi Derivate</p>
+          <ul className="text-sm text-gray-300 space-y-1">
+            <li>• <strong>Libro</strong>: autore, ISBN, numeroPagine</li>
+            <li>• <strong>DVD</strong>: regista, durata</li>
+            <li>• <strong>Rivista</strong>: numeroEdizione, mese</li>
+          </ul>
+        </div>
+      </div>
+      <div className="bg-gray-900 p-4 rounded-lg border border-yellow-500/30">
+        <p className="text-yellow-200 font-bold mb-2">Obiettivo:</p>
+        <p className="text-gray-300 text-sm">
+          Implementa override di StampaInfo() e CalcolaMulta() per ogni tipo.
+          Usa il polimorfismo per gestire una <code>List&lt;MediaItem&gt;</code> con tutti i media!
+          La multa e diversa per tipo: Libro 0.50€/giorno, DVD 1.00€/giorno, Rivista 0.20€/giorno.
+        </p>
       </div>
     </div>
-  )
+  </div>
+);
+
+const quizSlide4 = {
+  isQuiz: true,
+  slideId: "quiz-m4-4",
+  title: "Flashcards e Sfida Pratica",
+  subtitle: "Ripasso termini chiave e sfida di progettazione",
+  content: (slideKey) => <QuizSlide4Content slideKey={slideKey} />
 };
 
 
