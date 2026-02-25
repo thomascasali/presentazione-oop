@@ -99,6 +99,8 @@ const OOPPresentation = () => {
   const associazioniRiepilogoSlides = window.associazioniRiepilogoSlides || [];
   const associazioniQuizSlide = window.associazioniQuizSlide || null;
 
+  const eserciziSlides = window.eserciziSlides || [];
+
   // ==================== COSTRUZIONE ARRAY SLIDES ====================
   const allSlides = [
     dashboardSlide,
@@ -112,6 +114,7 @@ const OOPPresentation = () => {
     ...(ereditarietaQuizSlides.length > 0 ? ereditarietaQuizSlides : (ereditarietaQuizSlide ? [ereditarietaQuizSlide] : [])),
     ...associazioniRiepilogoSlides,
     ...(associazioniQuizSlide ? [associazioniQuizSlide] : []),
+    ...eserciziSlides,
   ];
 
   // ==================== CALCOLO INDICE SEZIONI ====================
@@ -250,6 +253,18 @@ const OOPPresentation = () => {
       moduleNumber: 5
     });
     slideIndex += 1;
+  }
+
+  // Esercizi Pratici
+  if (eserciziSlides.length > 0) {
+    sections.push({
+      title: 'Esercizi Pratici',
+      startSlide: slideIndex,
+      slideCount: eserciziSlides.length,
+      type: 'exercises',
+      moduleNumber: 6
+    });
+    slideIndex += eserciziSlides.length;
   }
 
   // ==================== PROGRESS TRACKING ====================
