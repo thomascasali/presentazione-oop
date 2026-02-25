@@ -1,7 +1,7 @@
 // ============================================================================
 // DASHBOARD PRINCIPALE - PRESENTAZIONE OOP
 // ============================================================================
-// Dashboard animata e moderna per navigare tra i 5 moduli del corso
+// Dashboard animata e moderna per navigare tra i 6 moduli del corso
 // ============================================================================
 
 const { useState, useEffect } = React;
@@ -22,6 +22,7 @@ const Lock = (props) => <IconWrapper {...props}><rect width="18" height="11" x="
 const Layers = (props) => <IconWrapper {...props}><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></IconWrapper>;
 const Link2 = (props) => <IconWrapper {...props}><path d="M9 17H7A5 5 0 0 1 7 7h2"></path><path d="M15 7h2a5 5 0 1 1 0 10h-2"></path><line x1="8" x2="16" y1="12" y2="12"></line></IconWrapper>;
 const BookOpen = (props) => <IconWrapper {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></IconWrapper>;
+const PenTool = (props) => <IconWrapper {...props}><path d="m12 19 7-7 3 3-7 7-3-3z"></path><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="m2 2 7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></IconWrapper>;
 const Award = (props) => <IconWrapper {...props}><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></IconWrapper>;
 const Clock = (props) => <IconWrapper {...props}><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></IconWrapper>;
 const Target = (props) => <IconWrapper {...props}><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></IconWrapper>;
@@ -78,7 +79,8 @@ const ModuleCard = ({ module, index, onClick }) => {
     purple: "from-purple-600 to-pink-600",
     green: "from-green-600 to-emerald-600",
     orange: "from-orange-600 to-red-600",
-    indigo: "from-indigo-600 to-blue-600"
+    indigo: "from-indigo-600 to-blue-600",
+    yellow: "from-yellow-500 to-orange-500"
   };
 
   const IconComponent = module.icon;
@@ -216,6 +218,15 @@ const Dashboard = ({ onNavigateToModule }) => {
       icon: Link2,
       color: "indigo",
       moduleKey: "associazioni"
+    },
+    {
+      number: 6,
+      title: "Esercizi",
+      subtitle: "Metti in pratica i concetti OOP",
+      slides: 5,
+      icon: PenTool,
+      color: "yellow",
+      moduleKey: "esercizi"
     }
   ];
 
@@ -252,7 +263,7 @@ const Dashboard = ({ onNavigateToModule }) => {
               Corso completo con C# e UML
             </div>
             <div className="text-cyan-400 text-lg font-semibold">
-              5 Moduli Interattivi + Quiz di Verifica
+              6 Moduli Interattivi + Quiz di Verifica
             </div>
           </FadeIn>
 
