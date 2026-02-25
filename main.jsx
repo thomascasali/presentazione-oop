@@ -692,6 +692,13 @@ const OOPPresentation = () => {
                             costruttoriPropertiesSlides.length + (costruttoriQuizSlide ? 1 : 0) +
                             metodiIncapsulamentoSlides.length + (metodiQuizSlide ? 1 : 0) +
                             ereditarietaPolimorfismoSlides.length + (ereditarietaQuizSlides.length || (ereditarietaQuizSlide ? 1 : 0))
+                          : null,
+                        esercizi: eserciziSlides.length > 0
+                          ? 1 + fondamentiSlides.length + (fondamentiQuizSlide ? 1 : 0) +
+                            costruttoriPropertiesSlides.length + (costruttoriQuizSlide ? 1 : 0) +
+                            metodiIncapsulamentoSlides.length + (metodiQuizSlide ? 1 : 0) +
+                            ereditarietaPolimorfismoSlides.length + (ereditarietaQuizSlides.length || (ereditarietaQuizSlide ? 1 : 0)) +
+                            associazioniRiepilogoSlides.length + (associazioniQuizSlide ? 1 : 0)
                           : null
                       };
                       const slideIndex = moduleMap[moduleKey];
