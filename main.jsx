@@ -255,13 +255,13 @@ const OOPPresentation = () => {
     slideIndex += 1;
   }
 
-  // Esercizi Pratici
+  // Modulo 6: Esercizi Pratici
   if (eserciziSlides.length > 0) {
     sections.push({
       title: 'Esercizi Pratici',
       startSlide: slideIndex,
       slideCount: eserciziSlides.length,
-      type: 'exercises',
+      type: 'module',
       moduleNumber: 6
     });
     slideIndex += eserciziSlides.length;
@@ -402,8 +402,8 @@ const OOPPresentation = () => {
           }
           break;
         default:
-          // Number keys 1-5 for quick module navigation
-          if (e.key >= '1' && e.key <= '5') {
+          // Number keys 1-6 for quick module navigation
+          if (e.key >= '1' && e.key <= '6') {
             const moduleNum = parseInt(e.key);
             const targetSection = sections.find(s => s.moduleNumber === moduleNum && s.type === 'module');
             if (targetSection) {
